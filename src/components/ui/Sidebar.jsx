@@ -40,14 +40,14 @@ const Sidebar = () => {
   return (
     <>
       <div className='w-full bg-white border-r border-gray-300 min-h-screen'>
-        <div className='py-3'>
+        <div className='py-3 sticky top-[10%]'>
           <div className='border-b border-gray-300 pb-3'>
             { mainLinks.map((link, index) => (
               <div key={index} className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%]'>
                 <div className='w-[30px] text-center'>
                   <i className={`${link.icon} text-lg`}></i>
                 </div>
-                <Link className='text-md' to={link.path}>{link.name}</Link>
+                <Link className='text-sm' to={link.path}>{link.name}</Link>
               </div>
             )) }
           </div>

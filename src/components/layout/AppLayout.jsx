@@ -9,7 +9,7 @@ const AppLayout = () => {
         <Navbar/>
         <div className='flex'>
           <div className='w-[20%]'>
-            <Sidebar/>
+              <Sidebar/>
           </div>
 
           {/* Main Content */}
