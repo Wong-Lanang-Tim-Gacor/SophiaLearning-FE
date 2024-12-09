@@ -23,5 +23,5 @@ karena base api-nya sudah ada di module api.
 export const GetProfile = async () => {
     const response = await api.get('/profile')
     return response.data
-  };
+}
   
