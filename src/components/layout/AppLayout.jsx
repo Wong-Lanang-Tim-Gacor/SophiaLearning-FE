@@ -10,12 +10,12 @@ const AppLayout = () => {
         <MenuProvider>
           <Navbar/>
           <div className='flex'>
-            <div className='w-[20%]'>
+            <div className='w-0 sm:w-[20%]'>
                 <Sidebar/>
             </div>
 
             {/* Main Content */}
-            <div className='w-[80%] p-6'>
+            <div className='w-full sm:w-[80%] p-6'>
               <Outlet/>
             </div>
           </div>

@@ -19,13 +19,13 @@ const Home = () => {
   return (
     <>
       <div className='flex justify-between items-center'>
-        <h1 className='text-xl font-semibold pb-6'>Daftar Kelas</h1>
+        <h1 className='text-xl font-semibold'>Daftar Kelas</h1>
         <div className='flex gap-x-2'>
           <Button type='primary' text='Buat Kelas'/>
           <Button type='secondary' text='Gabung Kelas'/>
         </div>
       </div>
-      <div className='grid grid-cols-4 gap-4'>
+      <div className='grid grid-cols-4 gap-4 py-6'>
         { classrooms.map((room, index) => (
           <Card data={room} key={index}/>
         )) }
