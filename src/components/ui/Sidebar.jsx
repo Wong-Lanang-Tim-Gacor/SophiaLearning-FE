@@ -42,8 +42,8 @@ const Sidebar = () => {
   ]
   return (
     <>
-      <div className='hidden sm:block sticky top-0 w-full bg-white border-r border-gray-300 min-h-screen'>
-        <div className='py-3 sticky top-[10%]'>
+      <div className='hidden sm:block sticky top-[8%] w-full bg-white border-r border-gray-300 h-screen overflow-y-scroll scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-slate-50'>
+        <div className='py-3'>
           <div className='border-b border-gray-300 pb-3'>
             {mainLinks.map((link, index) => (
               <div key={index} className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%]'>
@@ -68,8 +68,8 @@ const Sidebar = () => {
       </div>
 
       {/* Mobile Sidebar */}
-      <div className={`block sm:hidden fixed top-0 transition-all ${active ? 'left-0' : 'left-[-100%]'} w-[80%] bg-white border-r border-gray-300 min-h-screen z-10`}>
-        <div className='py-3 sticky top-[10%]'>
+      <div className={`block sm:hidden fixed top-[8%] transition-all ${active ? 'left-0' : 'left-[-100%]'} w-[80%] bg-white border-r border-gray-300 h-screen z-10 overflow-y-scroll scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-slate-50`}>
+        <div className='py-3'>
           <div className='border-b border-gray-300 pb-3'>
             {mainLinks.map((link, index) => (
               <div key={index} className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%]'>
