@@ -1,24 +1,21 @@
 import Card from '@/components/ui/Card'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {getClassroom} from "@/Controller/ClassroomController.js";
+import {data} from "autoprefixer";
 
 const Home = () => {
-  const classrooms = [
-    {
-      name: 'Matematika',
-      author: 'Alexandrina Bell',
-      color: 'bg-rose-500'
-    },
-    {
-      name: 'Sains Umum',
-      author: 'Steven Worm',
-      color: 'bg-blue-500'
-    },
-    {
-      name: 'Programming',
-      author: 'Mark Zuckerberg',
-      color: 'bg-purple-500'
+  const [classrooms,setClassroom] = useState([])
+
+  useEffect(() => {
+    const dataClassroom = async () => {
+      const data = await getClassroom()
+      setClassroom(data)
     }
-  ]
+
+    dataClassroom().catch((error) => {
+      console.error(error)
+    })
+  },[])
 
   return (
     <>
@@ -31,7 +28,7 @@ const Home = () => {
       </div>
       <div className='grid grid-cols-4 gap-4'>
         { classrooms.map((room, index) => (
-          <Card data={room}/>
+          <Card data={room} key={index}/>
         )) }
       </div>
     </>
