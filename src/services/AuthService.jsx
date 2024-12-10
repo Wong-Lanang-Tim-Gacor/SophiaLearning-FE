@@ -4,8 +4,15 @@ import { BASE_API } from '@/utils/Constant'
 
 // Service POST Method
 export const PostAuthenticate = async (data) => {
-    const response = await axios.post(BASE_API+'/login', data)
-    return response;
+    return await axios.post(BASE_API+'/auth/login', data)
+        .then(response => {
+            if (response.status === 200) {
+                sessionStorage.setItem('token', response.data.data.token)
+            }
+            return response.data
+        }).catch(error => {
+            console.error(error)
+        })
 }
 
 // Service GET Method
@@ -24,4 +31,5 @@ export const GetProfile = async () => {
     const response = await api.get('/profile')
     return response.data
 }
+
   
