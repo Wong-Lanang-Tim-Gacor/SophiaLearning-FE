@@ -1,7 +1,7 @@
 import api from "@/services/Api"
 
 const getClassroom = async () => {
-    return await api.get("/classrooms")
+    return await api.get("/classrooms/user/joined")
         .then((response) => {
             if (response.status === 200) return response.data.data
 
