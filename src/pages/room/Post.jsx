@@ -45,16 +45,14 @@ const Post = () => {
 
     return (
         <>
-            <div className='max-w-[980px] mx-auto container'>
-                <Banner />
-                <div className='mt-8 flex'>
-                    <div className='w-[40%]'></div>
-                    <div className='w-full space-y-4'>
-                        <CreatePost/>
-                        { posts.map((post, index) => (
-                            <ListPost key={index} post={post}/>
-                        )) }
-                    </div>
+            <Banner />
+            <div className='mt-8 flex'>
+                <div className='hidden sm:block w-[40%]'></div>
+                <div className='w-full space-y-4'>
+                    <CreatePost />
+                    {posts.map((post, index) => (
+                        <ListPost key={index} post={post} />
+                    ))}
                 </div>
             </div>
         </>
