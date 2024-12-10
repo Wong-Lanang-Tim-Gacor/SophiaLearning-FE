@@ -14,7 +14,7 @@ const getClassroom = async () => {
 const showClassroom = async (id) => {
     return await api.get(`/classrooms/${id}`)
         .then((response) => {
-            if (response.status === 200) return response.data.data
+            if (response.status === 200) return response.data
         })
         .catch((error) => {
             console.error(error)

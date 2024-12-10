@@ -10,8 +10,8 @@ const ListPost = (props) => {
                     <div className='bg-green-200 w-[50px] h-[50px] rounded-full'></div>
                 </div>
                 <div>
-                    <h3 className='text-md font-medium'>{post.theory}</h3>
-                    <p className='text-xs font-normal text-gray-500'>{post.created}</p>
+                    <h3 className='text-md font-medium'>{post.title}</h3>
+                    <p className='text-xs font-normal text-gray-500 mt-1'>{post.due_date}</p>
                 </div>
             </div>
         </div>
