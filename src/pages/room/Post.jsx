@@ -1,24 +1,9 @@
+import CreatePost from '@/components/room/CreatePost'
 import Banner from '@/components/ui/Banner'
-import ListItem from '@/components/ui/ListItem'
-import Navigation from '@/components/ui/Navigation'
+import ListPost from '@/components/room/ListPost'
 import React from 'react'
 
 const Post = () => {
-    const navs = [
-        {
-            name: 'Forum',
-            path: '/class'
-        },
-        {
-            name: 'Tugas',
-            path: '/assignment'
-        },
-        {
-            name: 'Anggota',
-            path: '/member'
-        }
-    ]
-
     const posts = [
         {
             theory: 'Matematika - Aljabar',
@@ -60,16 +45,14 @@ const Post = () => {
 
     return (
         <>
-            <div className='max-w-[980px] mx-auto container'>
-                <Navigation navs={navs} />
-                <Banner />
-                <div className='mt-8 flex'>
-                    <div className='w-[40%]'></div>
-                    <div className='w-full space-y-4'>
-                        { posts.map((post, index) => (
-                            <ListItem post={post}/>
-                        )) }
-                    </div>
+            <Banner />
+            <div className='mt-8 flex'>
+                <div className='hidden sm:block w-[40%]'></div>
+                <div className='w-full space-y-4'>
+                    <CreatePost />
+                    {posts.map((post, index) => (
+                        <ListPost key={index} post={post} />
+                    ))}
                 </div>
             </div>
         </>

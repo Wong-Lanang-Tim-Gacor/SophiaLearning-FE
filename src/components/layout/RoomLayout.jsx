@@ -2,9 +2,10 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from '../ui/Sidebar'
 import Navbar from '../ui/Navbar'
+import Navigation from '../ui/Navigation'
 import { MenuProvider } from '@/contexts/MenuContext'
 
-const AppLayout = () => {
+const RoomLayout = () => {
   return (
     <>
         <MenuProvider>
@@ -15,8 +16,11 @@ const AppLayout = () => {
             </div>
 
             {/* Main Content */}
-            <div className='w-full sm:w-[80%] p-6'>
-              <Outlet/>
+            <div className='w-full sm:w-[80%]'>
+              <Navigation/>
+              <div className='p-6 max-w-[980px] mx-auto container'>
+                <Outlet/>
+              </div>
             </div>
           </div>
         </MenuProvider>
@@ -24,4 +28,4 @@ const AppLayout = () => {
   )
 }
 
-export default AppLayout
+export default RoomLayout

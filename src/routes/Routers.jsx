@@ -5,6 +5,8 @@ import AppLayout from '@/components/layout/AppLayout'
 import Home from '@/pages/Home'
 import Post from '@/pages/room/Post'
 import Login from "@/pages/auth/Login.jsx";
+import Member from '@/pages/room/Member'
+import RoomLayout from '@/components/layout/RoomLayout'
 
 const Routers = () => {
   return (
@@ -14,7 +16,10 @@ const Routers = () => {
                 <Route path={'/login'} element={<Login/>} />
                 <Route path='/' element={<AppLayout/>}>
                   <Route path='/' element={<Home/>}/>
+                </Route>
+                <Route path='/' element={<RoomLayout/>}>
                   <Route path='/class' element={<Post/>}/>
+                  <Route path='/member' element={<Member/>}/>
                 </Route>
                 <Route path='/landing' element={<Landing/>}/>
             </Routes>
