@@ -23,45 +23,6 @@ const Post = () => {
         })
     }, [id])
 
-    const posts = [
-        {
-            theory: 'Matematika - Aljabar',
-            created: '2024-12-01'
-        },
-        {
-            theory: 'Fisika - Hukum Newton',
-            created: '2024-12-02'
-        },
-        {
-            theory: 'Kimia - Struktur Atom',
-            created: '2024-12-03'
-        },
-        {
-            theory: 'Biologi - Sel dan Organisme',
-            created: '2024-12-04'
-        },
-        {
-            theory: 'Geografi - Lapisan Bumi',
-            created: '2024-12-05'
-        },
-        {
-            theory: 'Sejarah - Revolusi Industri',
-            created: '2024-12-06'
-        },
-        {
-            theory: 'Bahasa Inggris - Tenses Dasar',
-            created: '2024-12-07'
-        },
-        {
-            theory: 'Ekonomi - Konsep Dasar Mikroekonomi',
-            created: '2024-12-08'
-        },
-        {
-            theory: 'Teknologi Informasi - Dasar-dasar Pemrograman',
-            created: '2024-12-09'
-        }
-    ]
-
     return (
         <>
             <Banner data={classroom} />
