@@ -1,7 +1,6 @@
 import Card from '@/components/ui/Card'
 import React, {useEffect, useState} from 'react'
-import {getClassroom} from "@/Controller/ClassroomController.js";
-import {data} from "autoprefixer";
+import {getClassroom} from "@/services/ClassroomService.js";
 
 const Home = () => {
   const [classrooms,setClassroom] = useState([])
