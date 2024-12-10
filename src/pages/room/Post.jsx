@@ -6,15 +6,14 @@ import {useParams} from "react-router-dom";
 import {showClassroom} from "@/services/ClassroomService.jsx";
 
 const Post = () => {
-    const [classroom,setClassroom]=useState([])
-    const {id} = useParams()
+    const [classroom, setClassroom] = useState([])
+    const { id } = useParams()
 
     useEffect(()=>{
         const getClassroom = async () => {
             await showClassroom(id)
                 .then((response) => {
                     setClassroom(response.data)
-                    console.log(response.data)
                 })
         }
 
