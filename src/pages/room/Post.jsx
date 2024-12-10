@@ -1,6 +1,6 @@
 import CreatePost from '@/components/room/CreatePost'
 import Banner from '@/components/ui/Banner'
-import ListItem from '@/components/ui/ListItem'
+import ListPost from '@/components/room/ListPost'
 import React from 'react'
 
 const Post = () => {
@@ -52,7 +52,7 @@ const Post = () => {
                     <div className='w-full space-y-4'>
                         <CreatePost/>
                         { posts.map((post, index) => (
-                            <ListItem key={index} post={post}/>
+                            <ListPost key={index} post={post}/>
                         )) }
                     </div>
                 </div>

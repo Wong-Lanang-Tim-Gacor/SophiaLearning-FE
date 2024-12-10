@@ -39,7 +39,7 @@ const Sidebar = () => {
   ]
   return (
     <>
-      <div className='w-full bg-white border-r border-gray-300 min-h-screen'>
+      <div className='sticky top-0 w-full bg-white border-r border-gray-300 min-h-screen'>
         <div className='py-3 sticky top-[10%]'>
           <div className='border-b border-gray-300 pb-3'>
             { mainLinks.map((link, index) => (

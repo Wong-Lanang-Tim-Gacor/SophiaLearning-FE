@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ListItem = (props) => {
+const ListPost = (props) => {
   const {post} = props
   return (
     <>
@@ -19,4 +19,4 @@ const ListItem = (props) => {
   )
 }
 
-export default ListItem
+export default ListPost
