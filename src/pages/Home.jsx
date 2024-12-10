@@ -1,6 +1,6 @@
 import Card from '@/components/ui/Card'
 import React, {useEffect, useState} from 'react'
-import {getClassroom} from "@/services/ClassroomService.js";
+import {getClassroom} from "@/services/ClassroomService.jsx";
 
 const Home = () => {
   const [classrooms,setClassroom] = useState([])
@@ -10,7 +10,6 @@ const Home = () => {
       const data = await getClassroom()
       setClassroom(data)
     }
-
     dataClassroom().catch((error) => {
       console.error(error)
     })
