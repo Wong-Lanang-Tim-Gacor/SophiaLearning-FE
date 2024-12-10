@@ -1,11 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 
 const Navigation = () => {
+    const {id} = useParams()
     const navs = [
         {
             name: 'Forum',
-            path: '/class'
+            path: `/room/${id}`,
         },
         {
             name: 'Tugas',
@@ -13,7 +14,7 @@ const Navigation = () => {
         },
         {
             name: 'Anggota',
-            path: '/member'
+            path: `/room/${id}/member`
         }
     ]
 
@@ -25,7 +26,7 @@ const Navigation = () => {
                 <div className='p-6 max-w-[980px] mx-auto container flex gap-x-8 sm:gap-x-12 pb-6'>
                     {navs.map((nav, index) => (
                         <Link
-                            className={`${nav.path === '/class' ? activeStyle : nonActiveStyle}`}
+                            className={`${nav.path === `/room/${id}` ? activeStyle : nonActiveStyle}`}
                             key={index}
                             to={nav.path}>
                             {nav.name}
