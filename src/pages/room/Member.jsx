@@ -17,15 +17,6 @@ const Member = () => {
                     {members.map((member, index) => (
                         <ListMember member={member} />
                     ))}
-                    {members.map((member, index) => (
-                        <ListMember member={member} />
-                    ))}
-                    {members.map((member, index) => (
-                        <ListMember member={member} />
-                    ))}
-                    {members.map((member, index) => (
-                        <ListMember member={member} />
-                    ))}
                 </div>
             </div>
         </>
