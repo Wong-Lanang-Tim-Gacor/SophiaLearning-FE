@@ -1,3 +1,4 @@
+import CreatePost from '@/components/room/CreatePost'
 import Banner from '@/components/ui/Banner'
 import ListItem from '@/components/ui/ListItem'
 import Navigation from '@/components/ui/Navigation'
@@ -66,6 +67,7 @@ const Post = () => {
                 <div className='mt-8 flex'>
                     <div className='w-[40%]'></div>
                     <div className='w-full space-y-4'>
+                        <CreatePost/>
                         { posts.map((post, index) => (
                             <ListItem post={post}/>
                         )) }

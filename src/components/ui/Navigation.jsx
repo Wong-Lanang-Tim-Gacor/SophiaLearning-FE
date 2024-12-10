@@ -7,7 +7,7 @@ const Navigation = (props) => {
   const nonActiveStyle = 'text-gray-400 text-sm font-normal'
   return (
     <>
-        <div className='flex gap-x-12 py-6'>
+        <div className='flex gap-x-12 pb-6'>
             { navs.map((nav, index) => (
                 <Link
                     className={`${nav.path === '/class' ? activeStyle : nonActiveStyle}`} 
