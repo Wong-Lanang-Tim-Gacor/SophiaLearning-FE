@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Button from '../ui/Button'
 
 const CreatePost = () => {
   const [active, setActive] = useState(false)
@@ -14,9 +15,9 @@ const CreatePost = () => {
             <textarea className='resize-none w-full bg-slate-100 outline-none p-4 text-sm h-[150px] rounded-md'></textarea>
             <div className='flex justify-between items-center'>
                 <div className='bg-slate-200 w-[200px] h-[20px]'></div>
-                <div className='flex items-center'>
-                    <button onClick={() => setActive(!active)} className='px-4 py-2'>Batal</button>
-                    <button className='px-4 py-2'>Posting</button>
+                <div className='flex items-center gap-x-2'>
+                    <Button onClick={() => setActive(!active)} type='secondary' text='Batal'/>
+                    <Button type='disable' text='Posting'/>
                 </div>
             </div>
         </div> : <></>}
