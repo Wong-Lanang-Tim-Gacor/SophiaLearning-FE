@@ -1,22 +1,26 @@
 import Card from '@/components/ui/Card'
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {getClassroom} from "@/services/ClassroomService.jsx";
 import Button from '@/components/ui/Button';
 import {useNavigate} from "react-router-dom";
+import AuthContext from "@/contexts/AuthContext.jsx";
 
 const Home = () => {
   const [classrooms,setClassroom] = useState([])
+  const {status} = useContext(AuthContext)
   const navigate = useNavigate();
 
   useEffect(() => {
-    const dataClassroom = async () => {
-      const data = await getClassroom()
-      setClassroom(data)
+    if (status === 'logged') {
+      const dataClassroom = async () => {
+        const data = await getClassroom()
+        setClassroom(data)
+      }
+      dataClassroom().catch((error) => {
+        console.error(error)
+      })
     }
-    dataClassroom().catch((error) => {
-      console.error(error)
-    })
-  },[])
+  },[status])
 
   return (
     <>

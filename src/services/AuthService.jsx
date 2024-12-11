@@ -28,8 +28,16 @@ karena base api-nya sudah ada di module api.
  **/
 
 export const GetProfile = async () => {
-    const response = await api.get('/profile')
+    const response = await api.get('/user')
     return response.data
 }
 
-  
+export const CheckAuthUser = async () => {
+    return await api.get('/user')
+        .then(() => {
+            return true
+        }).catch(error => {
+            console.error(error)
+            return false
+        });
+}
