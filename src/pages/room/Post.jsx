@@ -7,9 +7,9 @@ import {showClassroom} from "@/services/ClassroomService.jsx";
 
 const Post = () => {
     const [classroom, setClassroom] = useState([])
-    const { id } = useParams()
+    const {id} = useParams()
 
-    useEffect(()=>{
+    useEffect(() => {
         const getClassroom = async () => {
             await showClassroom(id)
                 .then((response) => {
@@ -24,16 +24,17 @@ const Post = () => {
 
     return (
         <>
-            <Banner data={classroom} />
+            <Banner data={classroom}/>
             <div className='mt-8 flex'>
                 <div className='hidden sm:block w-[40%]'></div>
                 <div className='w-full space-y-4'>
-                    <CreatePost />
+                    <CreatePost/>
                     {
                         classroom?.assignments ?
-                            classroom?.assignments.map((assignment,index) => (
-                                <ListPost key={index} post={assignment} />
-                            )) : 'Loading Data....'
+                            classroom?.assignments.map((assignment, index) => (
+                                <ListPost key={index} post={assignment} colorBg={classroom.bg_tw_class}/>
+                            ))
+                            : 'Loading Data....'
                     }
                 </div>
             </div>
