@@ -1,24 +1,33 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useState} from 'react';
 import {PostAuthenticate} from '@/services/AuthService.jsx';
 import Illustration from '@/assets/images/illustration-login.svg'
 import Button from '@/components/ui/Button';
 import {Link, useNavigate} from 'react-router-dom';
-import AuthContext, {AuthProvider} from "@/contexts/AuthContext.jsx";
+import AuthContext from "@/contexts/AuthContext.jsx";
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const {status,setStatus} = useContext(AuthContext)
+    const {state, dispatch} = useContext(AuthContext)
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         return await PostAuthenticate({
             email: email,
             password: password,
-        }).then(() => {
-            setStatus('logged')
-            navigate('/')
+        }).then((response) => {
+            if(response.meta.status === 'success') {
+                sessionStorage.setItem('token', response.data.token)
+                dispatch({type: 'AUTH',
+                    payload: {
+                        isLoading: true,
+                        auth: true,
+                        token: response.data.token 
+                    }
+                })
+                navigate('/')
+            }
         }).catch(error => {
             console.error(error)
         })

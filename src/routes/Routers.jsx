@@ -7,6 +7,7 @@ import Post from '@/pages/room/Post'
 import Login from "@/pages/auth/Login.jsx";
 import Member from '@/pages/room/Member'
 import RoomLayout from '@/components/layout/RoomLayout'
+import ProtectedRoute from './ProtectedRoute'
 
 const Routers = () => {
   return (
@@ -14,12 +15,14 @@ const Routers = () => {
         <BrowserRouter>
             <Routes>
                 <Route path={'/login'} element={<Login/>} />
-                <Route path='/' element={<AppLayout/>}>
-                  <Route path='/' element={<Home/>}/>
-                </Route>
-                <Route path='/' element={<RoomLayout/>}>
-                  <Route path='/room/:id' element={<Post/>}/>
-                  <Route path='/room/:id/member' element={<Member/>}/>
+                <Route element={<ProtectedRoute/>}>
+                  <Route path='/' element={<AppLayout/>}>
+                    <Route index path='/' element={<Home/>}/>
+                  </Route>
+                  <Route path='/room' element={<RoomLayout/>}>
+                    <Route path=':id' element={<Post/>}/>
+                    <Route path=':id/member' element={<Member/>}/>
+                  </Route>
                 </Route>
                 <Route path='/landing' element={<Landing/>}/>
             </Routes>
