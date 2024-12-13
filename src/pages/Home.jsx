@@ -32,7 +32,7 @@ const Home = () => {
         {
             classrooms ? (
                 classrooms.map((room, index) => (
-                    <Card key={index} data={room}/>
+                    <Card key={index} data={room} onClick={() => navigate('/room/'+room.id)}/>
                 ))
             ) : [1,2,3,4].map(item => (
                 <CardSkeleton/>
