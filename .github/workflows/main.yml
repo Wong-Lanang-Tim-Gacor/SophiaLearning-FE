@@ -21,7 +21,7 @@ jobs:
         run: npm install
 
       - name: Build React App / Vue App (depending on user app) 🏗️
-        run: npm run build
+        run: vite build
 
       - name: Upload to cPanel 📂
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
