@@ -25,7 +25,16 @@ const showClassroom = async (id) => {
 const storeClassroom = async (data) => {
     return await api.post('/classrooms', data)
         .then((response) => {
-            if(response.data.meta.code === 201) return response.data
+            if (response.data.meta.code === 201) return response.data
+        }).catch((error) => {
+            console.error(error)
+        })
+}
+
+const joinClassroom = async (classroomCode) => {
+    return await api.post(`/classrooms/${classroomCode}/join`)
+        .then((response) => {
+            if (response.data.meta.code === 200) return response.data
         }).catch((error) => {
             console.error(error)
         })
@@ -45,4 +54,5 @@ export {
     showClassroom,
     updateClassroom,
     storeClassroom,
+    joinClassroom
 }

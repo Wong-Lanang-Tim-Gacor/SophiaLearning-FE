@@ -1,16 +1,18 @@
 import Card from '@/components/ui/Card'
 import React, {createContext, useContext, useEffect, useState} from 'react'
-import {getClassroom, storeClassroom} from "@/services/ClassroomService.jsx";
+import {getClassroom, joinClassroom, storeClassroom} from "@/services/ClassroomService.jsx";
 import {useNavigate} from "react-router-dom";
 import CardSkeleton from "@/components/skeleton/home/CardSkeleton.jsx";
 import JoinModal from '@/components/ui/modal/JoinModal';
 import CreateModal from '@/components/ui/modal/CreateModal';
+
 const ClassroomsContext = createContext();
 
 const Home = () => {
     const [classrooms, setClassroom] = useState()
     const [active, setActive] = useState(false)
     const [modal, setModal] = useState(null)
+    const [classroomCode, setClassroomCode] = useState()
     const [className, setClassname] = useState()
     const [description, setDescription] = useState()
     const navigate = useNavigate();
@@ -26,6 +28,18 @@ const Home = () => {
             alert('Classroom created failed!');
             console.log(error)
         })
+    }
+
+    const handleJoin = async () => {
+        return await joinClassroom(classroomCode)
+            .then(response => {
+                console.log(response)
+                alert('Join kelas berhasil');
+                setClassroom(prevClassrooms => [...prevClassrooms, response.data]); // Add new classroom to context
+            }).catch(error => {
+                alert('Join Classroom  failed!');
+                console.log(error)
+            })
     }
 
     useEffect(() => {
@@ -59,9 +73,9 @@ const Home = () => {
             {modal === 'join' ?
                 <JoinModal
                     onClose={() => setModal(null)}
-                    code={code}
+                    code={classroomCode}
                     onSubmit={handleJoin}
-                    onChangeCode={(code) => setCode(code)}
+                    onChangeCode={(code) => setClassroomCode(code)}
                 />
                 : <></>}
 
