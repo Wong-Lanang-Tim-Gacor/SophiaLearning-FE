@@ -21,6 +21,16 @@ const showClassroom = async (id) => {
         })
 }
 
+
+const storeClassroom = async (data) => {
+    return await api.post('/classrooms', data)
+        .then((response) => {
+            if(response.data.meta.code === 201) return response.data
+        }).catch((error) => {
+            console.error(error)
+        })
+}
+
 const updateClassroom = async (id, data) => {
     return await api.put(`/classrooms/${id}`, data)
         .then((response) => {
@@ -34,4 +44,5 @@ export {
     getClassroom,
     showClassroom,
     updateClassroom,
+    storeClassroom,
 }
