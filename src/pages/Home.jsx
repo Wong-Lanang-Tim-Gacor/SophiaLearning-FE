@@ -3,9 +3,10 @@ import React, {useEffect, useState} from 'react'
 import {getClassroom} from "@/services/ClassroomService.jsx";
 import Button from '@/components/ui/Button';
 import {useNavigate} from "react-router-dom";
+import CardSkeleton from "@/components/skeleton/home/CardSkeleton.jsx";
 
 const Home = () => {
-  const [classrooms,setClassroom] = useState([])
+  const [classrooms,setClassroom] = useState()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,9 +29,15 @@ const Home = () => {
         </div>
       </div>
       <div className='grid grid-cols-4 gap-4 py-6'>
-        { classrooms.map((room, index) => (
-          <Card key={index} data={room}/>
-        )) }
+        {
+            classrooms ? (
+                classrooms.map((room, index) => (
+                    <Card key={index} data={room}/>
+                ))
+            ) : [1,2,3,4].map(item => (
+                <CardSkeleton/>
+            ))
+        }
       </div>
     </>
   )
