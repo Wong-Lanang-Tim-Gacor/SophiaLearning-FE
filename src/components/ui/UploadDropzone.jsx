@@ -19,7 +19,7 @@ function UploadDropzone(props) {
             cursor: 'pointer',
         }}>
             <div {...getRootProps({className: 'dropzone'})}>
-                <input {...getInputProps()} />
+                <input onInput={(e) => props.onChangeFile(e.target.files)} {...getInputProps()} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
             </div>
             <aside>

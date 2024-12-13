@@ -58,7 +58,7 @@ function CreateAssignment(props) {
 
                 <div className="my-2">
                     <label htmlFor="" className={'block mb-2'}>Upload Lampiran</label>
-                    <UploadDropzone/>
+                    <UploadDropzone onChangeFile={(val) => console.log(val)}/>
                 </div>
 
                 <Button type='primary' text='Simpan'/>
