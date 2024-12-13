@@ -2,7 +2,7 @@ import React from 'react';
 
 function ListPostSkeleton() {
     return (
-        <div className='border border-gray-200 p-4 rounded-lg cursor-pointer hover:shadow-md bg-slate-200 animate-pulse'>
+        <div className='border border-gray-200 p-4 rounded-lg cursor-pointer hover:shadow-md bg-slate-200 animate-pulse my-2'>
             <div className="flex items-center gap-x-4 ">
                 <div>
                     <div className={`w-[50px] h-[50px] rounded-full grid place-content-center bg-slate-300`}>
