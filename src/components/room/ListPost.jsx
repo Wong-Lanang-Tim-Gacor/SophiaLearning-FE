@@ -1,7 +1,9 @@
+import { DateFormat } from '@/utils/FormattingString'
 import React from 'react'
 
 const ListPost = (props) => {
-  const {post, colorBg,typePost = 'material'} = props
+  const {post, colorBg, typePost = 'material'} = props
+  
   return (
     <>
         <div className='border border-gray-300 p-4 rounded-lg cursor-pointer hover:shadow-md'>
@@ -19,7 +21,7 @@ const ListPost = (props) => {
                 </div>
                 <div>
                     <h3 className='text-md font-medium'>{post.title}</h3>
-                    <p className='text-xs font-normal text-gray-500 mt-1'>{post.due_date}</p>
+                    <p className='text-xs font-normal text-gray-500 mt-1'>{DateFormat(post.due_date)}</p>
                 </div>
             </div>
         </div>
