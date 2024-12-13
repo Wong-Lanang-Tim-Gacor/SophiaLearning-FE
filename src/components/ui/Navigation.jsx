@@ -7,7 +7,7 @@ const Navigation = () => {
 
     const navs = [
         {
-            name: 'Forum',
+            name: 'Kelas',
             path: `/room/${id}`,
         },
         {
