@@ -33,7 +33,6 @@ const Home = () => {
     const handleJoin = async () => {
         return await joinClassroom(classroomCode)
             .then(response => {
-                console.log(response)
                 alert('Join kelas berhasil');
                 setClassroom(prevClassrooms => [...prevClassrooms, response.data]); // Add new classroom to context
             }).catch(error => {
