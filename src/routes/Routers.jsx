@@ -15,6 +15,7 @@ import DetailPost from '@/pages/room/DetailPost'
 import ProfileLayout from '@/components/layout/ProfileLayout'
 import Profile from '@/pages/profile/Profile'
 import EditPassword from '@/pages/profile/EditPassword'
+import Calendar from '@/pages/Calendar'
 
 const Routers = () => {
   return (
@@ -28,6 +29,7 @@ const Routers = () => {
                 <Route element={<ProtectedRoute/>}>
                   <Route path='/' element={<AppLayout/>}>
                     <Route index path='/' element={<Home/>}/>
+                    <Route path='/calendar' element={<Calendar/>}/>
                   </Route>
                   <Route path='/room' element={<RoomLayout/>}>
                     <Route path=':id' element={<Post/>}/>
