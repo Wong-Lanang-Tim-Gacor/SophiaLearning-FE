@@ -2,7 +2,7 @@ import React from 'react'
 
 const Button = (props) => {
     const types = {
-        primary: 'bg-green-600 text-white',
+        primary: 'bg-black text-white',
         secondary: 'bg-transparent border border-slate-300',
         disable: 'bg-gray-100'
     }

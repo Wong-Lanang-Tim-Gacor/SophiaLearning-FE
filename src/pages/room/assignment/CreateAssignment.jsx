@@ -14,6 +14,7 @@ import {
     Separator,
 } from "react-simple-wysiwyg";
 import UploadDropzone from "@/components/ui/UploadDropzone.jsx";
+import Button from '@/components/ui/Button';
 
 function CreateAssignment(props) {
     const {id} = useParams();
@@ -60,7 +61,7 @@ function CreateAssignment(props) {
                     <UploadDropzone/>
                 </div>
 
-                <button className={'bg-blue-400 p-2 px-4 rounded-full text-white mt-3'}>Simpan</button>
+                <Button type='primary' text='Simpan'/>
             </form>
         </>
     );
