@@ -13,6 +13,7 @@ import {
     HtmlButton,
     Separator,
 } from "react-simple-wysiwyg";
+import UploadDropzone from "@/components/ui/UploadDropzone.jsx";
 
 function CreateAssignment(props) {
     const {id} = useParams();
@@ -30,7 +31,7 @@ function CreateAssignment(props) {
                     <label htmlFor="" className={'block'}>Petunjuk</label>
                     <EditorProvider>
                         <Editor value={description}
-                            className={'bg-gray-50 mt-2'}
+                                className={'bg-gray-50 mt-2'}
                                 placeholder={'Masukan judul'} onChange={e => setDescription(e.target.value)}>
                             <Toolbar>
                                 <BtnUndo/>
@@ -53,6 +54,13 @@ function CreateAssignment(props) {
                         </Editor>
                     </EditorProvider>
                 </div>
+
+                <div className="my-2">
+                    <label htmlFor="" className={'block mb-2'}>Upload Lampiran</label>
+                    <UploadDropzone/>
+                </div>
+
+                <button className={'bg-blue-400 p-2 px-4 rounded-full text-white mt-3'}>Simpan</button>
             </form>
         </>
     );
