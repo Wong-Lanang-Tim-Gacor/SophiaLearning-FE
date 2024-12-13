@@ -10,6 +10,7 @@ import RoomLayout from '@/components/layout/RoomLayout'
 import ProtectedRoute from './ProtectedRoute'
 import GuestRoute from './GuestRoute'
 import Assignment from "@/pages/room/Assignment.jsx";
+import CreateAssignment from "@/pages/room/assignment/CreateAssignment.jsx";
 
 const Routers = () => {
   return (
@@ -28,6 +29,7 @@ const Routers = () => {
                     <Route path=':id' element={<Post/>}/>
                       <Route path=':id/member' element={<Member/>}/>
                       <Route path=':id/assignment' element={<Assignment/>}/>
+                      <Route path=':id/assignment/create' element={<CreateAssignment/>}/>
                   </Route>
                 </Route>
             </Routes>
