@@ -29,7 +29,7 @@ const Home = () => {
       </div>
       <div className='grid grid-cols-4 gap-4 py-6'>
         { classrooms.map((room, index) => (
-          <Card data={room} key={index} onClick={() => navigate('/room/'+room.id)}/>
+          <Card key={index} data={room}/>
         )) }
       </div>
     </>

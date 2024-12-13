@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import MenuContext from '@/contexts/MenuContext'
 import {Link, useNavigate} from 'react-router-dom'
 import {getClassroom} from "@/services/ClassroomService.jsx";
+import { TextSlice } from '@/utils/FormattingString';
 
 const Sidebar = () => {
     const {active} = useContext(MenuContext)
@@ -63,7 +64,7 @@ const Sidebar = () => {
                                     }}>
                                         <div key={index}
                                              className={`w-[30px] h-[30px] rounded-full ${room.bg_tw_class} flex items-center justify-center`}>
-                                            <p className='text-white text-xs font-bolder'>{room.class_name.split(' ').map(word => word[0]).join('')}</p>
+                                            <p className='text-white text-xs font-bolder'>{TextSlice(room.class_name)}</p>
                                         </div>
                                         <p className='text-sm font-medium'>{room.class_name}</p>
                                     </div>
