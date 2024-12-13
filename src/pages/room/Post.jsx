@@ -2,13 +2,14 @@ import CreatePost from '@/components/room/CreatePost'
 import Banner from '@/components/ui/Banner'
 import ListPost from '@/components/room/ListPost'
 import React, {useEffect, useState} from 'react'
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {showClassroom} from "@/services/ClassroomService.jsx";
 import ListPostSkeleton from "@/components/skeleton/room/ListPostSkeleton.jsx";
 import BannerSkeleton from "@/components/skeleton/room/BannerSkeleton.jsx";
 import CodeRoom from '@/components/room/CodeRoom';
 
 const Post = () => {
+    const navigate = useNavigate()
     const [classroom, setClassroom] = useState()
     const {id} = useParams()
 
@@ -44,7 +45,10 @@ const Post = () => {
                     {
                         classroom?.assignments ?
                             classroom?.assignments.map((assignment, index) => (
-                                <ListPost key={index} post={assignment} colorBg={classroom.bg_tw_class}/>
+                                <ListPost key={index}
+                                    onClick={() => navigate('detail')}
+                                    post={assignment} 
+                                    colorBg={classroom.bg_tw_class}/>
                             ))
                             : (
                                 <ListPostSkeleton/>

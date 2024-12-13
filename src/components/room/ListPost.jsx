@@ -6,7 +6,7 @@ const ListPost = (props) => {
   
   return (
     <>
-        <div className='border border-gray-300 p-4 rounded-lg cursor-pointer hover:shadow-md'>
+        <div {...props} className='border border-gray-300 p-4 rounded-lg cursor-pointer hover:shadow-md'>
             <div className="flex items-center gap-x-4">
                 <div>
                     <div className={`${colorBg} w-[50px] h-[50px] rounded-full grid place-content-center`}>
