@@ -27,9 +27,9 @@ const Home = () => {
           <Button type='secondary' text='Gabung Kelas'/>
         </div>
       </div>
-      <div className='grid grid-cols-4 gap-4 py-6'>
+      <div className='grid grid-cols-1 sm:grid-cols-4 gap-4 py-6'>
         { classrooms.map((room, index) => (
-          <Card key={index} data={room}/>
+          <Card key={index} data={room} onClick={() => navigate('/room/'+room.id)}/>
         )) }
       </div>
     </>
