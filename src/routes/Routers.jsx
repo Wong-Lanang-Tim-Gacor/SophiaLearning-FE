@@ -14,6 +14,7 @@ import CreateAssignment from "@/pages/room/assignment/CreateAssignment.jsx";
 import DetailPost from '@/pages/room/DetailPost'
 import ProfileLayout from '@/components/layout/ProfileLayout'
 import Profile from '@/pages/profile/Profile'
+import EditPassword from '@/pages/profile/EditPassword'
 
 const Routers = () => {
   return (
@@ -37,6 +38,7 @@ const Routers = () => {
                   </Route>
                   <Route path='/profile' element={<ProfileLayout/>}>
                     <Route path='/profile' element={<Profile/>}/>
+                    <Route path='/profile/password' element={<EditPassword/>}/>
                   </Route>
                 </Route>
             </Routes>
