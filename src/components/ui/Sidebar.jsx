@@ -6,7 +6,7 @@ import { TextSlice } from '@/utils/FormattingString';
 
 const Sidebar = () => {
     const {active} = useContext(MenuContext)
-    const [classrooms, setClassrooms] = useState([])
+    const [classrooms, setClassrooms] = useState()
     const navigate = useNavigate()
 
     const mainLinks = [
@@ -59,16 +59,22 @@ const Sidebar = () => {
                             classrooms ?
                                 classrooms?.map((room, index) => (
                                     <div key={index}
-                                         className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%] cursor-pointer' onClick={() => {
-                                        navigate(`/room/${room.id}`)
-                                    }}>
+                                         className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%] cursor-pointer'
+                                         onClick={() => {
+                                             navigate(`/room/${room.id}`)
+                                         }}>
                                         <div key={index}
                                              className={`w-[30px] h-[30px] rounded-full ${room.bg_tw_class} flex items-center justify-center`}>
                                             <p className='text-white text-xs font-bolder'>{TextSlice(room.class_name)}</p>
                                         </div>
                                         <p className='text-sm font-medium'>{room.class_name}</p>
                                     </div>
-                                )) : 'Loading ...'
+                                )) : <div className='flex items-center gap-x-4 pl-6 py-3 bg-slate-200 rounded-r-2xl w-[95%] cursor-pointer'>
+                                    <div className={`w-[30px] h-[30px] rounded-full bg-slate-300 flex items-center justify-center`}>
+                                        <p className='text-white text-xs font-bolder'></p>
+                                    </div>
+                                    <p className='text-sm font-medium bg-slate-300 w-22 h-7'></p>
+                                </div>
                         }
                     </div>
                 </div>
@@ -83,7 +89,7 @@ const Sidebar = () => {
                             <div key={index}
                                  className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%]'>
                                 <div className='w-[30px] text-center'>
-                                    <i className={`${link.icon} text-lg`}></i>
+                                <i className={`${link.icon} text-lg`}></i>
                                 </div>
                                 <Link className='text-sm' to={link.path}>{link.name}</Link>
                             </div>
