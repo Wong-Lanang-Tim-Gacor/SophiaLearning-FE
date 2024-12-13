@@ -12,6 +12,8 @@ import GuestRoute from './GuestRoute'
 import Assignment from "@/pages/room/Assignment.jsx";
 import CreateAssignment from "@/pages/room/assignment/CreateAssignment.jsx";
 import DetailPost from '@/pages/room/DetailPost'
+import ProfileLayout from '@/components/layout/ProfileLayout'
+import Profile from '@/pages/profile/Profile'
 
 const Routers = () => {
   return (
@@ -32,6 +34,9 @@ const Routers = () => {
                       <Route path=':id/member' element={<Member/>}/>
                       <Route path=':id/assignment' element={<Assignment/>}/>
                       <Route path=':id/assignment/create' element={<CreateAssignment/>}/>
+                  </Route>
+                  <Route path='/profile' element={<ProfileLayout/>}>
+                    <Route path='/profile' element={<Profile/>}/>
                   </Route>
                 </Route>
             </Routes>
