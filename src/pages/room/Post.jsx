@@ -25,8 +25,13 @@ const Post = () => {
     return (
         <>
             <Banner data={classroom}/>
-            <div className='mt-8 flex'>
-                <div className='hidden sm:block w-[40%]'></div>
+            <div className='mt-8 flex gap-4'>
+                <div className='sm:block w-[40%]'>
+                    <div className="border p-3 ">
+                        <span className={'font-semibold text-gray-700'}>Kode Kelas</span>
+                        <h3 className={`text-2xl font-bold text-blue-400`}>{classroom?.identifier_code}</h3>
+                    </div>
+                </div>
                 <div className='w-full space-y-4'>
                     <CreatePost/>
                     {
