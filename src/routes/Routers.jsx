@@ -9,6 +9,7 @@ import Member from '@/pages/room/Member'
 import RoomLayout from '@/components/layout/RoomLayout'
 import ProtectedRoute from './ProtectedRoute'
 import GuestRoute from './GuestRoute'
+import Assignment from "@/pages/room/Assignment.jsx";
 
 const Routers = () => {
   return (
@@ -25,7 +26,8 @@ const Routers = () => {
                   </Route>
                   <Route path='/room' element={<RoomLayout/>}>
                     <Route path=':id' element={<Post/>}/>
-                    <Route path=':id/member' element={<Member/>}/>
+                      <Route path=':id/member' element={<Member/>}/>
+                      <Route path=':id/assignment' element={<Assignment/>}/>
                   </Route>
                 </Route>
             </Routes>
