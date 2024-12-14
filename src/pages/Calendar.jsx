@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
-import { dayNames, months } from '@/utils/CalendarUtilities'
-import { tasks } from '@/utils/DummyData';
-import Todo from '@/components/ui/Todo';
+import { dayNames, months } from '@/utils/CalendarUtility'
+import { tasks } from '@/utils/DummyData'
+import Todo from '@/components/ui/Todo'
 
 const Calendar = () => {
   const [dates, setDates] = useState([])
@@ -58,7 +58,7 @@ const Calendar = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Calendar;
+export default Calendar

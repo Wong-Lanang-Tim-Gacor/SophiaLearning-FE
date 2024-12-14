@@ -2,7 +2,7 @@ import React, {useMemo, useRef, useState} from 'react'
 import { useScroll, motion, useTransform } from 'framer-motion';
 import ExampleImage from '../../assets/images/homepage.png'
 
-const AboutLanding = () => {
+const About = () => {
     const [widthScreen, setWidth] = useState(window.innerWidth)
     const ref = useRef(null)
     const { scrollYProgress } = useScroll({
@@ -29,4 +29,4 @@ const AboutLanding = () => {
     )
 }
 
-export default AboutLanding
+export default About

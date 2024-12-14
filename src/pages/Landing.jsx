@@ -1,14 +1,14 @@
 import React from 'react'
-import HeroSection from '@/components/landing/HeroSection'
-import AboutSection from '@/components/landing/AboutSection'
+import Hero from '@/components/landing/Hero'
+import About from '@/components/landing/About'
 import Feature from '@/components/landing/Feature'
 import Footer from '@/components/landing/Footer'
 
 const Landing = () => {
   return (
     <>
-        <HeroSection/>
-        <AboutSection/>
+        <Hero/>
+        <About/>
         <Feature/>
         <Footer/>
     </>
