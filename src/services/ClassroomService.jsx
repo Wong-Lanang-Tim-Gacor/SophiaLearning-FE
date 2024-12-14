@@ -39,10 +39,19 @@ const updateClassroom = async (id, data) => {
         })
 }
 
+const archiveClassroom = async (id) => {
+    return await api.put(`/classrooms/${id}`,{
+        is_archived: true,
+    }).then(response => {
+        return response.data
+    })
+}
+
 export {
     getClassroom,
     showClassroom,
     updateClassroom,
     storeClassroom,
-    joinClassroom
+    joinClassroom,
+    archiveClassroom,
 }

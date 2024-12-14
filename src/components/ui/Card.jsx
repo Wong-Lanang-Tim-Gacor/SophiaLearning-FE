@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {toast} from "react-hot-toast";
+import {archiveClassroom} from "@/services/ClassroomService.jsx";
 
 const Card = (props) => {
     const { data } = props;
@@ -21,6 +22,16 @@ const Card = (props) => {
             });
     };
 
+    const handleArchive = async () => {
+        return await archiveClassroom(data?.id)
+            .then(response => {
+                toast.success('Kelas berhasil di arsipkan')
+            })
+            .catch(e => {
+                toast.error('Kelas gagal di arsipkan')
+            })
+    }
+
     return (
         <>
             <div {...props} className='border border-gray-300 rounded-lg hover:shadow-md cursor-pointer'>
@@ -36,7 +47,7 @@ const Card = (props) => {
                             {linkCopied ? 'Link Disalin!' : 'Salin Link'}
                         </button>
                         <button className="block w-full text-left">Edit</button>
-                        <button className="block w-full text-left">Arsip</button>
+                        <button className="block w-full text-left" onClick={handleArchive}>Arsip</button>
                     </div>
 
                     <div className={`${String(data.bg_tw_class)} px-4 pe-7 py-8 rounded-t-lg`}
