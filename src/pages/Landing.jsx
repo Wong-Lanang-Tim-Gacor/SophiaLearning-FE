@@ -1,10 +1,16 @@
 import React from 'react'
-import Navbar from '@/components/ui/Navbar'
+import HeroSection from '@/components/landing/HeroSection'
+import AboutSection from '@/components/landing/AboutSection'
+import Feature from '@/components/landing/Feature'
+import Footer from '@/components/landing/Footer'
 
 const Landing = () => {
   return (
     <>
-        <Navbar/>
+        <HeroSection/>
+        <AboutSection/>
+        <Feature/>
+        <Footer/>
     </>
   )
 }

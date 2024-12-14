@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { dayNames, months } from '@/utils/CalendarUtilities'
+import { tasks } from '@/utils/DummyData';
+import Todo from '@/components/ui/Todo';
 
 const Calendar = () => {
   const [dates, setDates] = useState([])
@@ -22,20 +24,35 @@ const Calendar = () => {
     setDates(days)
   }, [])
 
+  const getTasksForDate = (fullDate) => {
+    return tasks.filter((task) => task.due_date.includes(fullDate))
+  }
+
   return (
     <div className='calendar'>
-      {dates.length > 0 && (
-        <h1 className='text-lg font-bold text-center py-4'>
-          {months[dates[0].month]} {dates[0].year}
-        </h1>
-      )}
+      <h1 className='text-lg font-bold text-center py-4'>
+        {months[dates[0]?.month]} {dates[0]?.year}
+      </h1>
 
-      <div className='grid grid-cols-7 mt-4 overflow-x-auto'>
+      <div className='flex flex-nowrap mt-4 overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-slate-50'>
         {dates.map((day, index) => (
-          <div key={index} className='p-4 border border-gray-200 text-center h-[70vh]'>
-            <p className='text-xs sm:text-sm text-gray-500'>{dayNames[day.day]}</p>
-            <div className={`${today === day.day ? 'bg-black text-white rounded-lg' : ''}`}>
-                <p className='text-lg sm:text-2xl font-semibold'>{day.date}</p>
+          <div
+            key={index}
+            className='p-4 flex-1 basis-1/7 border border-gray-200 text-center min-w-[150px] sm:min-w-[100px] min-h-[70vh]'
+          >
+            <p className='text-xs sm:text-sm text-gray-500'>
+              {dayNames[day.day]}
+            </p>
+            <div
+              className={`${today === day.day ? 'bg-black text-white rounded-lg' : ''
+                }`}
+            >
+              <p className='text-lg sm:text-2xl font-semibold'>{day.date}</p>
+            </div>
+            <div className='space-y-1 py-6'>
+              {getTasksForDate(day.date).map((task, index) => (
+                <Todo key={index} data={task}/>
+              ))}
             </div>
           </div>
         ))}
