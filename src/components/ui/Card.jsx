@@ -32,13 +32,15 @@ const Card = (props) => {
                     </button>
                     <div
                         className={`${showMenu ? 'scale-1' : 'scale-0'} rounded-md transition-all border border-gray-300 shadow-md absolute p-4 w-[150px] right-7 top-3 space-y-4 bg-white text-sm`}>
-                        <button className={'block'} onClick={handleCopyLink}>
+                        <button className="block w-full text-left" onClick={handleCopyLink}>
                             {linkCopied ? 'Link Disalin!' : 'Salin Link'}
                         </button>
-                        <button className={'block'}>Edit</button>
-                        <button className={'block'}>Arsip</button>
+                        <button className="block w-full text-left">Edit</button>
+                        <button className="block w-full text-left">Arsip</button>
                     </div>
-                    <div className={`${String(data.bg_tw_class)} px-4 pe-7 py-8 rounded-t-lg`} onClick={() => navigate('/room/' + data.id)}>
+
+                    <div className={`${String(data.bg_tw_class)} px-4 pe-7 py-8 rounded-t-lg`}
+                         onClick={() => navigate('/room/' + data.id)}>
                         <h2 className='text-md text-white font-medium'>{data.class_name}</h2>
                     </div>
                     <div className='p-4 flex gap-x-2 items-center'>
