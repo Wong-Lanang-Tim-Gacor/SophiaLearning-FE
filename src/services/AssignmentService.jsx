@@ -9,17 +9,6 @@ const getAssignmentByClass = async (id) => {
         })
 }
 
-const storeAssignment = async (data) => {
-    return await api.post(`/resources/data`, data, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    }).then(response => {
-        return response.data
-    })
-}
-
 export {
     getAssignmentByClass,
-    storeAssignment,
 }

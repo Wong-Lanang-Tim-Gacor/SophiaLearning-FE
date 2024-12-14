@@ -19,9 +19,20 @@ const storeAnnouncement = async (data) => {
         .then(res => res.data)
 }
 
+const storeResource = async (data) => {
+    return await api.post(`/resources/data`, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then(response => {
+        return response.data
+    })
+}
+
 export {
     getResource,
     getAnnouncement,
     getMaterial,
-    storeAnnouncement
+    storeAnnouncement,
+    storeResource
 }
