@@ -8,21 +8,6 @@ const showResource = async (id) => {
     return await api.get(`resources/data/${id}`)
         .then(res => res.data)
 }
-const getAnnouncement = async () => {
-    return await api.get('resources/announcements')
-        .then(res => res.data)
-}
-
-const getMaterial = async () => {
-    return await api.get('resources/materials')
-        .then(res => res.data)
-}
-
-const storeAnnouncement = async (data) => {
-    return await api.post('resources/data', data)
-        .then(res => res.data)
-}
-
 const storeResource = async (data) => {
     return await api.post(`/resources/data`, data, {
         headers: {
@@ -33,11 +18,16 @@ const storeResource = async (data) => {
     })
 }
 
+const storeChat = async (data) => {
+    return await api.post(`resources/chat`, data)
+        .then(res => {
+            return res.data
+        })
+}
+
 export {
     getResource,
     showResource,
-    getAnnouncement,
-    getMaterial,
-    storeAnnouncement,
+    storeChat,
     storeResource,
 }
