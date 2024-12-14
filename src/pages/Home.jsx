@@ -88,9 +88,13 @@ const Home = () => {
                 )}
 
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6'>
-                    {state.classrooms?.length > 0
-                        ? state.classrooms.map((room, index) => <Card key={index} data={room} />)
-                        : [1, 2, 3, 4].map((item) => <CardSkeleton key={item} />)}
+                    {
+                        state.classrooms
+                            ? state.classrooms.map((room, index) => <Card key={index} data={room} />)
+                            : (
+                                [1, 2, 3, 4].map((item) => <CardSkeleton key={item} />)
+                            )
+                    }
                 </div>
             </div>
         </ClassroomContext.Provider>

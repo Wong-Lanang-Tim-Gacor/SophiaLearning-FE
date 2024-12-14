@@ -1,5 +1,5 @@
 export const initialState = {
-    classrooms: [],
+    classrooms: null,
     active: false,
     modal: null,
     classroomCode: '',
