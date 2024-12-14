@@ -1,12 +1,15 @@
 import React from 'react'
 import Routers from './routes/Routers'
-import {AuthProvider} from "@/contexts/AuthContext.jsx";
+import {AuthProvider} from '@/contexts/AuthContext';
+import { GlobalProvider } from './contexts/GlobalContext';
 
 const App = () => {
   return (
     <>
         <AuthProvider>
-            <Routers />
+          <GlobalProvider>
+              <Routers />
+          </GlobalProvider>
         </AuthProvider>
     </>
   )

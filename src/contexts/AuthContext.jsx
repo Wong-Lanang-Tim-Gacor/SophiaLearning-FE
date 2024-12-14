@@ -1,5 +1,5 @@
-import AuthReducer from "@/reducers/AuthReducer";
-import { createContext, useReducer } from "react";
+import AuthReducer from '@/reducers/AuthReducer'
+import { createContext, useReducer } from 'react'
 
 const AuthContext = createContext()
 
@@ -18,4 +18,4 @@ export const AuthProvider = ({children}) => {
     )
 }
 
-export default AuthContext;
+export default AuthContext

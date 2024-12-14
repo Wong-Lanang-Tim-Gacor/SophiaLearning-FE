@@ -1,14 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext} from 'react'
 import MenuContext from '@/contexts/MenuContext'
 import {Link, useNavigate} from 'react-router-dom'
-import {getClassroom} from "@/services/ClassroomService.jsx";
-import {TextSlice} from '@/utils/FormattingString';
-import {Logout} from "@/services/AuthService.jsx";
-import {toast} from "react-hot-toast";
+import {TextSlice} from '@/utils/FormattingString'
+import {Logout} from "@/services/AuthService.jsx"
+import {toast} from "react-hot-toast"
+import GlobalContext from '@/contexts/GlobalContext'
 
 const Sidebar = () => {
     const {active} = useContext(MenuContext)
-    const [classrooms, setClassrooms] = useState()
+    const {classrooms} = useContext(GlobalContext)
     const navigate = useNavigate()
 
     const mainLinks = [
@@ -29,26 +29,16 @@ const Sidebar = () => {
         }
     ]
 
-    useEffect(() => {
-        const getDataClassroom = async () => {
-            return await getClassroom()
-                .then(response => {
-                    setClassrooms(response.slice(0, 5))
-                })
-        }
-        getDataClassroom().catch(error => console.log(error))
-    }, []);
-
     const handleLogout = async () => {
         try {
             toast.success('Logout sukses')
-            await Logout();
-            sessionStorage.clear();
-            navigate('/login');
+            await Logout()
+            sessionStorage.clear()
+            navigate('/login')
         } catch (e) {
             toast.error('Logout gagal')
         }
-    };
+    }
 
     return (
         <>

@@ -1,11 +1,10 @@
 import { getClassroom } from '@/services/ClassroomService'
 import { createContext, useEffect, useState } from 'react'
 
-const MenuContext = createContext()
+const GlobalContext = createContext()
 
-export const MenuProvider = ({children}) => {
-    const [active, setActive] = useState(false)
-    const [classrooms, setClassrooms] = useState([])
+export const GlobalProvider = ({ children }) => {
+    const [classrooms, setClassrooms] = useState(null)
 
     useEffect(() => {
         const getDataClassroom = async () => {
@@ -18,10 +17,10 @@ export const MenuProvider = ({children}) => {
     }, [])
 
     return (
-        <MenuContext.Provider value={{active, setActive, classrooms}}>
+        <GlobalContext.Provider value={{classrooms}}>
             {children}
-        </MenuContext.Provider>
+        </GlobalContext.Provider>
     )
 }
 
-export default MenuContext
+export default GlobalContext
