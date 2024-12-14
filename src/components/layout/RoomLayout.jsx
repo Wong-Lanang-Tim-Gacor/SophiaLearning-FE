@@ -4,10 +4,15 @@ import Sidebar from '../ui/Sidebar'
 import Navbar from '../ui/Navbar'
 import Navigation from '../ui/Navigation'
 import { MenuProvider } from '@/contexts/MenuContext'
+import {Toaster} from "react-hot-toast";
 
 const RoomLayout = () => {
   return (
     <>
+      <Toaster
+          position="top-right"
+          reverseOrder={false}
+      />
         <MenuProvider>
           <Navbar/>
           <div className='flex'>

@@ -3,10 +3,15 @@ import { MenuProvider } from '@/contexts/MenuContext'
 import Sidebar from '../ui/Sidebar'
 import Navbar from '../ui/Navbar'
 import { Outlet } from 'react-router-dom'
+import {Toaster} from "react-hot-toast";
 
 const ProfileLayout = () => {
     return (
         <>
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
             <MenuProvider>
                 <Navbar />
                 <div className='flex'>
