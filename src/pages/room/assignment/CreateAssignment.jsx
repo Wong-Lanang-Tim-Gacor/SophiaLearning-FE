@@ -17,6 +17,7 @@ import UploadDropzone from "@/components/ui/UploadDropzone.jsx";
 import Button from '@/components/ui/Button';
 import {storeClassroom} from "@/services/ClassroomService.jsx";
 import {storeAssignment} from "@/services/AssignmentService.jsx";
+import {toast, Toaster} from "react-hot-toast";
 
 function CreateAssignment(props) {
     const {id} = useParams();
@@ -37,10 +38,10 @@ function CreateAssignment(props) {
             type: 'assignment'
         })
             .then((response) => {
-                alert('success')
                 navigate(`/room/${id}/assignment`)
+                toast.success("Assignment added successfully!");
             }).catch(err => {
-                alert('error')
+                toast.error("Assignment added failed!");
                 console.log(err)
             })
     }
