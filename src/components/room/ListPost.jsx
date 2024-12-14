@@ -23,7 +23,7 @@ const ListPost = (props) => {
                 </div>
                 <div>
                     <h3 className='text-md font-medium'>{post.title}</h3>
-                    <p className='text-xs font-normal text-gray-500 mt-1'>{DateFormat(post.due_date)}</p>
+                    <p className='text-xs font-normal text-gray-500 mt-1'>{post.due_date ? DateFormat(post.due_date) : 'Tidak ada deadline'}</p>
                 </div>
             </div>
         </div>
