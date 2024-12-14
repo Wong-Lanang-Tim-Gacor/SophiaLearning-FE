@@ -1,10 +1,12 @@
-import { DateFormat } from '@/utils/FormattingString';
+import {DateFormat} from '@/utils/FormattingString';
 import React, {useEffect, useState} from 'react';
+import {useNavigate, useParams} from "react-router-dom";
 
 function ListAssignment(props) {
-    const {data,key,bgColor} = props
+    const {id} = useParams();
+    const {data, key, bgColor} = props
     const [menuVisible, setMenuVisible] = useState(false);
-
+    const navigate = useNavigate();
     // Fungsi untuk toggle menu
     const toggleMenu = () => {
         setMenuVisible(!menuVisible);
@@ -38,12 +40,13 @@ function ListAssignment(props) {
         };
     }, []);
     return (
-        <div className="border border-gray-300 p-4 rounded-lg cursor-pointer hover:shadow-md mt-5" key={key}>
+        <div className="border border-gray-300 p-4 rounded-lg cursor-pointer hover:shadow-md mt-5" key={key}
+             onClick={() => navigate(`/room/${id}/resource/${data.id}`)}>
             <div className="flex items-center justify-between gap-x-4">
                 <div className="flex items-center gap-3">
                     <div>
                         <div className={`${bgColor} w-[50px] h-[50px] rounded-full grid place-content-center`}>
-                            <i className={'fas fa-tasks text-white'}></i>
+                            <i className={'fas fa-book text-white'}></i>
                         </div>
                     </div>
                     <div>
