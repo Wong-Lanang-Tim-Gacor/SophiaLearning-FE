@@ -3,10 +3,11 @@ import MenuContext from '@/contexts/MenuContext'
 import {Link, useNavigate} from 'react-router-dom'
 import {TextSlice} from '@/utils/FormattingString'
 import {Logout} from "@/services/AuthService.jsx"
-import {toast} from "react-hot-toast"
 import GlobalContext from '@/contexts/GlobalContext'
+import AuthContext from '@/contexts/AuthContext'
 
 const Sidebar = () => {
+    const {dispatch} = useContext(AuthContext)
     const {active} = useContext(MenuContext)
     const {classrooms} = useContext(GlobalContext)
     const navigate = useNavigate()
@@ -31,12 +32,12 @@ const Sidebar = () => {
 
     const handleLogout = async () => {
         try {
-            toast.success('Logout sukses')
             await Logout()
             sessionStorage.clear()
-            navigate('/login')
-        } catch (e) {
-            toast.error('Logout gagal')
+            dispatch({ type: 'DEAUTH', payload: { isLoading: true } })
+            if (state.isLoading) return navigate('/login')
+        } catch (error) {
+            console.log(error);
         }
     }
 
