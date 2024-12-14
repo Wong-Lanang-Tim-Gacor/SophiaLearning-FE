@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import Button from '../ui/Button'
 
-const CreatePost = () => {
+const CreateAnnouncement = () => {
   const [active, setActive] = useState(false)
   const [content, setContent] = useState('')
   
   return (
     <>
         {!active ? <div onClick={() => setActive(!active)} className='border border-gray-300 p-4 rounded-lg cursor-pointer shadow-sm'>
-            <p className='text-sm text-gray-500'>Buat postingan kelas</p>
+            <p className='text-sm text-gray-500'>Buat Informasi Kelas</p>
         </div> : <></> }
 
         {active ? 
@@ -35,4 +35,4 @@ const CreatePost = () => {
   )
 }
 
-export default CreatePost
+export default CreateAnnouncement
