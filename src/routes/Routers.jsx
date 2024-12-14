@@ -18,11 +18,13 @@ import EditPassword from '@/pages/profile/EditPassword'
 import Calendar from '@/pages/Calendar'
 import Materials from "@/pages/room/Materials.jsx";
 import CreateMaterials from "@/pages/room/materials/CreateMaterials.jsx";
+import ScrollToTop from '@/utils/ScrollToTop'
 
 const Routers = () => {
     return (
         <>
             <BrowserRouter>
+                <ScrollToTop/>
                 <Routes>
                     <Route element={<GuestRoute/>}>
                         <Route path='/landing' element={<Landing/>}/>
