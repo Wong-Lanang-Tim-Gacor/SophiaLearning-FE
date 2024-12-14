@@ -65,7 +65,7 @@ const Home = () => {
                         <i className='fas fa-plus text-lg'></i>
                     </button>
                     <div
-                        className={`${active ? 'scale-1' : 'scale-0'} rounded-md transition-all border border-gray-300 shadow-md absolute p-4 w-[150px] right-0 space-y-4 bg-white text-sm`}>
+                        className={`${active ? 'scale-1' : 'scale-0'} rounded-md transition-all border border-gray-300 shadow-md absolute p-4 w-[150px] right-0 space-y-4 bg-white text-sm z-10`}>
                         <button onClick={() => setModal('join')}>Gabung Kelas</button>
                         <button onClick={() => setModal('create')}>Buat Kelas</button>
                     </div>
@@ -96,7 +96,7 @@ const Home = () => {
                 {
                     classrooms ? (
                         classrooms.map((room, index) => (
-                            <Card key={index} data={room} onClick={() => navigate('/room/' + room.id)}/>
+                            <Card key={index} data={room}/>
                         ))
                     ) : [1, 2, 3, 4].map(item => (
                         <CardSkeleton key={item}/>
