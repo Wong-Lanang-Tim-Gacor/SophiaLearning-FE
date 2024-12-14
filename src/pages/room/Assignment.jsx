@@ -6,7 +6,7 @@ import ListPostSkeleton from "@/components/skeleton/room/ListPostSkeleton.jsx";
 import Button from '@/components/ui/Button';
 import TeacherContext from "@/contexts/TeacherContext.jsx";
 
-function Assignment(props) {
+const Assignment = () => {
     const {id} = useParams();
     const navigate = useNavigate()
     const [assignments, setAssignments] = useState()
