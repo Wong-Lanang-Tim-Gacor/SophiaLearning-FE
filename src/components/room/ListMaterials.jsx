@@ -51,7 +51,7 @@ function ListMaterials(props) {
                     </div>
                     <div>
                         <h3 className='text-md font-medium'>{data?.title}</h3>
-                        <p className='text-xs font-normal text-gray-500 mt-1'>{DateFormat(data?.due_date)}</p>
+                        <p className='text-xs font-normal text-gray-500 mt-1'>{DateFormat(data?.created_at)}</p>
                     </div>
                 </div>
                 <div className="relative menu-container">
