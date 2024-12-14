@@ -115,11 +115,11 @@ const DetailAssignment = (props) => {
                                 }
                             </div>
                         </div>
-                        <div className="flex mt-5 gap-5">
+                        <div className="flex flex-col lg:flex-row mt-5 gap-5">
                             <div className="w-full">
                                 <div dangerouslySetInnerHTML={{ __html: resource.content }} />
                             </div>
-                            <div className="w-1/3 border rounded-md ">
+                            <div className="lg:w-1/3 w-full border rounded-md ">
                                 <div className="space-y-4">
                                     {
                                         resource?.attachment?.map((attachment, index) => {
