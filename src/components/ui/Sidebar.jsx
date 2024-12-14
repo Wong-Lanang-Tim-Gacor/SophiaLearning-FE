@@ -1,11 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import MenuContext from '@/contexts/MenuContext'
-import { Link, useNavigate } from 'react-router-dom'
-import { getClassroom } from "@/services/ClassroomService.jsx";
-import { TextSlice } from '@/utils/FormattingString';
+import {Link, useNavigate} from 'react-router-dom'
+import {getClassroom} from "@/services/ClassroomService.jsx";
+import {TextSlice} from '@/utils/FormattingString';
+import {Logout} from "@/services/AuthService.jsx";
+import {toast} from "react-hot-toast";
 
 const Sidebar = () => {
-    const { active } = useContext(MenuContext)
+    const {active} = useContext(MenuContext)
     const [classrooms, setClassrooms] = useState()
     const navigate = useNavigate()
 
@@ -37,10 +39,17 @@ const Sidebar = () => {
         getDataClassroom().catch(error => console.log(error))
     }, []);
 
-    const handleLogout = () => {
-        sessionStorage.clear();
-        return navigate('/login')
-    }
+    const handleLogout = async () => {
+        try {
+            toast.success('Logout sukses')
+            await Logout();
+            sessionStorage.clear();
+            navigate('/login');
+        } catch (e) {
+            toast.error('Logout gagal')
+        }
+    };
+
     return (
         <>
             <div
@@ -49,10 +58,10 @@ const Sidebar = () => {
                     <div className='border-b border-gray-300 pb-3'>
                         {mainLinks.map((link, index) => (
                             <div key={index}
-                                className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%] cursor-pointer'
-                                onClick={() => {
-                                    navigate(link.path)
-                                }}>
+                                 className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%] cursor-pointer'
+                                 onClick={() => {
+                                     navigate(link.path)
+                                 }}>
                                 <div className='w-[30px] text-center'>
                                     <i className={`${link.icon} text-lg`}></i>
                                 </div>
@@ -65,12 +74,12 @@ const Sidebar = () => {
                             classrooms ?
                                 classrooms?.map((room, index) => (
                                     <div key={index}
-                                        className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%] cursor-pointer'
-                                        onClick={() => {
-                                            navigate(`/room/${room.id}`)
-                                        }}>
+                                         className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%] cursor-pointer'
+                                         onClick={() => {
+                                             navigate(`/room/${room.id}`)
+                                         }}>
                                         <div key={index}
-                                            className={`w-[30px] h-[30px] rounded-full ${room.bg_tw_class} flex items-center justify-center`}>
+                                             className={`w-[30px] h-[30px] rounded-full ${room.bg_tw_class} flex items-center justify-center`}>
                                             <p className='text-white text-xs font-bolder'>{TextSlice(room.class_name)}</p>
                                         </div>
                                         <p className='text-sm font-medium'>{room.class_name}</p>
@@ -90,10 +99,12 @@ const Sidebar = () => {
                         }
                     </div>
                     <div className='pl-6 py-3'>
-                        <button onClick={() => navigate('/profile')} className='flex items-center gap-x-6 mx-2 text-sm font-medium py-3'>
+                        <button onClick={() => navigate('/profile')}
+                                className='flex items-center gap-x-6 mx-2 text-sm font-medium py-3'>
                             <i className="fas fa-user"></i>Profile
                         </button>
-                        <button onClick={handleLogout} className='flex items-center gap-x-6 mx-2 text-sm font-medium py-3'>
+                        <button onClick={handleLogout}
+                                className='flex items-center gap-x-6 mx-2 text-sm font-medium py-3'>
                             <i className="fas fa-sign-out"></i>Keluar
                         </button>
                     </div>
@@ -107,7 +118,7 @@ const Sidebar = () => {
                     <div className='border-b border-gray-300 pb-3'>
                         {mainLinks.map((link, index) => (
                             <div key={index}
-                                className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%]'>
+                                 className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%]'>
                                 <div className='w-[30px] text-center'>
                                     <i className={`${link.icon} text-lg`}></i>
                                 </div>
@@ -120,12 +131,12 @@ const Sidebar = () => {
                             classrooms ?
                                 classrooms?.map((room, index) => (
                                     <div key={index}
-                                        className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%]'
-                                        onClick={() => {
-                                            navigate(`/room/${room.id}`)
-                                        }}>
+                                         className='flex items-center gap-x-4 pl-6 py-3 hover:bg-gray-100 rounded-r-2xl w-[95%]'
+                                         onClick={() => {
+                                             navigate(`/room/${room.id}`)
+                                         }}>
                                         <div key={index}
-                                            className={`w-[30px] h-[30px] rounded-full ${room.bg_tw_class} flex items-center justify-center`}>
+                                             className={`w-[30px] h-[30px] rounded-full ${room.bg_tw_class} flex items-center justify-center`}>
                                             <p className='text-white text-xs font-bolder'>{TextSlice(room.class_name)}</p>
                                         </div>
                                         <p className='text-sm font-medium'>{room.class_name}</p>
@@ -146,7 +157,8 @@ const Sidebar = () => {
                     </div>
                 </div>
                 <div className='pl-6 py-3'>
-                    <button onClick={() => navigate('/profile')} className='flex items-center gap-x-6 mx-2 text-sm font-medium py-3'>
+                    <button onClick={() => navigate('/profile')}
+                            className='flex items-center gap-x-6 mx-2 text-sm font-medium py-3'>
                         <i className="fas fa-user"></i>Profile
                     </button>
                     <button onClick={handleLogout} className='flex items-center gap-x-6 mx-2 text-sm font-medium py-3'>

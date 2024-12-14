@@ -32,6 +32,13 @@ export const GetProfile = async () => {
     return response.data
 }
 
+export const Logout = async () => {
+    return await api.post('/auth/logout')
+    .then(response => {
+        return response.data
+    })
+}
+
 export const CheckAuthUser = async () => {
     return await api.get('/user')
         .then(() => {
