@@ -18,13 +18,15 @@ export const GlobalProvider = ({ children }) => {
             }
         }
 
-        if(state.auth) return fetchClassrooms()
-
-    }, [])
+        if(state.auth) {
+            fetchClassrooms()
+        }
+    }, [state])
 
     const resetClassrooms = () => {
         setClassrooms(null)
     }
+
 
     return (
         <GlobalContext.Provider value={{classrooms, resetClassrooms}}>
