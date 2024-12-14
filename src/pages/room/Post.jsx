@@ -1,13 +1,15 @@
 import CreateAnnouncement from '@/components/room/CreateAnnouncement.jsx'
 import Banner from '@/components/ui/Banner'
 import ListPost from '@/components/room/ListPost'
-import React, {useEffect, useState} from 'react'
+import React, {createContext, useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
 import {showClassroom} from "@/services/ClassroomService.jsx";
 import ListPostSkeleton from "@/components/skeleton/room/ListPostSkeleton.jsx";
 import BannerSkeleton from "@/components/skeleton/room/BannerSkeleton.jsx";
 import CodeRoom from '@/components/room/CodeRoom';
 import {getResource} from "@/services/ResourceService.jsx";
+
+const ResourceContext = createContext()
 
 const Post = () => {
     const navigate = useNavigate()
@@ -28,7 +30,7 @@ const Post = () => {
     }, [id])
 
     return (
-        <>
+        <ResourceContext.Provider value={resource}>
             {
                 resource ? (
                     <Banner data={resource}/>
@@ -42,7 +44,7 @@ const Post = () => {
                     />
                 </div>
                 <div className='w-full space-y-4'>
-                    <CreateAnnouncement/>
+                    <CreateAnnouncement setData={d => setResource(d)} />
                     {
                         resource?.resources ?
                             resource?.resources.map((r, index) => (
@@ -59,7 +61,7 @@ const Post = () => {
                     }
                 </div>
             </div>
-        </>
+        </ResourceContext.Provider>
     )
 }
 

@@ -5,7 +5,7 @@ import {storeAnnouncement} from "@/services/ResourceService.jsx";
 import {useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
 
-const CreateAnnouncement = () => {
+const CreateAnnouncement = (props) => {
     const {id} = useParams()
     const [active, setActive] = useState(false)
     const [title, setTitle] = useState('')
@@ -20,6 +20,8 @@ const CreateAnnouncement = () => {
             status: 'active',
             type: 'announcement'
         }).then(response => {
+            // console.log(response)
+            props.setData(response.data)
             toast.success('Sukses menambahkan pemberitahuan')
         }).catch(err => {
             console.log(err)
