@@ -17,13 +17,14 @@ function Login() {
             email: email,
             password: password,
         }).then((response) => {
-            if(response.meta.status === 'success') {
+            if (response.meta.status === 'success') {
                 sessionStorage.setItem('token', response.data.token)
-                dispatch({type: 'AUTH',
+                dispatch({
+                    type: 'AUTH',
                     payload: {
                         isLoading: true,
                         auth: true,
-                        token: response.data.token 
+                        token: response.data.token
                     }
                 })
                 navigate('/')
@@ -36,11 +37,12 @@ function Login() {
         <>
             <div className='h-[90vh] flex flex-col items-center justify-center'>
                 <div className='max-w-[980px] w-[80%] grid grid-cols-1 sm:grid-cols-2 items-center'>
-                    <div className='hidden sm:block'>
-                        <img className='w-[80%] mx-auto block' src={Illustration} alt='Illustration'/>
-                    </div>
+                    {/*<div className='hidden sm:block'>*/}
+                    {/*    <img className='w-[80%] mx-auto block' src={Illustration} alt='Illustration'/>*/}
+                    {/*</div>*/}
                     <div>
-                        <h1 className='text-3xl font-semibold mb-12'>Masuk</h1>
+                        <h1 className='text-3xl font-semibold mb-3'>Masuk</h1>
+                        <p className={'mb-7'}>Silahkan masukan email dan password untuk melanjutkan!</p>
                         <form onSubmit={handleSubmit} className='space-y-4'>
                             <div className='space-y-2'>
                                 <label className='text-sm font-medium'>Email</label>
@@ -56,9 +58,7 @@ function Login() {
                             </div>
                             <Button type='primary' text='Masuk'/>
                         </form>
-                        <p className='text-sm text-gray-500 font-normal mt-8'>Tidak memiliki Akun? <Link to='/'
-                                                                                                         className='text-green-600 font-semibold'>Daftar
-                            disini</Link></p>
+                        <p className='text-sm text-gray-500 font-normal mt-8'>Tidak memiliki Akun? <Link to='/' className='text-blue-600 font-semibold'>Daftar disini</Link></p>
                     </div>
                 </div>
             </div>
