@@ -86,7 +86,7 @@ const DetailAssignment = (props) => {
                                 <div>
                                     <h1 className='text-xl font-semibold'>{resource.title}</h1>
                                     <p className='text-sm text-gray-500'>
-                                        {isTeacher ? <Link to='attachment' className='text-blue-500 text-sm underline font-medium'>Lihat Pengumpulan</Link> : resource?.classroom?.teacher?.name } •  
+                                        {isTeacher.isTeacher ? <Link to='attachment' className='text-blue-500 text-sm underline font-medium'>Lihat Pengumpulan</Link> : resource?.classroom?.teacher?.name } •
                                         {DateFormat(resource.created_at)}</p>
                                 </div>
                             </div>
