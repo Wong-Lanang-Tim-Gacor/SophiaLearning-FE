@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import CardSkeleton from "@/components/skeleton/home/CardSkeleton.jsx";
 import JoinModal from '@/components/ui/modal/JoinModal';
 import CreateModal from '@/components/ui/modal/CreateModal';
+import {toast} from "react-hot-toast";
 
 const ClassroomsContext = createContext();
 
@@ -22,10 +23,11 @@ const Home = () => {
             class_name: className,
             description: description
         }).then(response => {
-            alert('Classroom created successfully!');
+            setModal(null)
+            toast.success('Sukses menambahkan kelas!')
             setClassroom(prevClassrooms => [...prevClassrooms, response.data]); // Add new classroom to context
         }).catch(error => {
-            alert('Classroom created failed!');
+            toast.error('Gagal menambahkan kelas!');
             console.log(error)
         })
     }
@@ -33,10 +35,11 @@ const Home = () => {
     const handleJoin = async () => {
         return await joinClassroom(classroomCode)
             .then(response => {
-                alert('Join kelas berhasil');
+                setModal(null)
+                toast.success('Sukses gabung kelas')
                 setClassroom(prevClassrooms => [...prevClassrooms, response.data]); // Add new classroom to context
             }).catch(error => {
-                alert('Join Classroom  failed!');
+                toast.error('Gagal gabung kelas')
                 console.log(error)
             })
     }
