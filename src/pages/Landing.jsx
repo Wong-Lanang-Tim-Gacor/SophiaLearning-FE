@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '@/components/ui/Navbar'
+import HeroSection from '@/components/landing/HeroSection'
 
 const Landing = () => {
   return (
     <>
-        <Navbar/>
+        <HeroSection/>
     </>
   )
 }
