@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import Button from '../ui/Button'
-import {storeAssignment} from "@/services/AssignmentService.jsx";
-import {storeAnnouncement} from "@/services/ResourceService.jsx";
 import {useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import {storeResource} from "@/services/ResourceService.jsx";
 
 const CreateAnnouncement = (props) => {
     const {id} = useParams()
@@ -13,7 +12,7 @@ const CreateAnnouncement = (props) => {
 
     const postAnnouncement = async (e) => {
         e.preventDefault(e)
-        return await storeAnnouncement({
+        return await storeResource({
             classroom_id: id,
             title: title ?? 'Pemberitahuan Informasi',
             content: content,

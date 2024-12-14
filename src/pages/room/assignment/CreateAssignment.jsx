@@ -15,9 +15,8 @@ import {
 } from "react-simple-wysiwyg";
 import UploadDropzone from "@/components/ui/UploadDropzone.jsx";
 import Button from '@/components/ui/Button';
-import {storeClassroom} from "@/services/ClassroomService.jsx";
-import {storeAssignment} from "@/services/AssignmentService.jsx";
 import {toast, Toaster} from "react-hot-toast";
+import {storeResource} from "@/services/ResourceService.jsx";
 
 function CreateAssignment(props) {
     const {id} = useParams();
@@ -29,7 +28,7 @@ function CreateAssignment(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        return await storeAssignment({
+        return await storeResource({
             classroom_id: id,
             title: title,
             content: description,
