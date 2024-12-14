@@ -16,8 +16,13 @@ export const GlobalProvider = ({ children }) => {
         getDataClassroom().catch(error => console.log(error))
     }, [])
 
+    const resetClassrooms = () => {
+        setClassrooms(null);
+    };
+
+
     return (
-        <GlobalContext.Provider value={{classrooms}}>
+        <GlobalContext.Provider value={{classrooms, resetClassrooms}}>
             {children}
         </GlobalContext.Provider>
     )

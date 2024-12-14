@@ -9,7 +9,7 @@ import AuthContext from '@/contexts/AuthContext'
 const Sidebar = () => {
     const {dispatch} = useContext(AuthContext)
     const {active} = useContext(MenuContext)
-    const {classrooms} = useContext(GlobalContext)
+    const {classrooms, resetClassrooms} = useContext(GlobalContext)
     const navigate = useNavigate()
 
     const mainLinks = [
@@ -34,10 +34,11 @@ const Sidebar = () => {
         try {
             await Logout()
             sessionStorage.clear()
+            resetClassrooms()
             dispatch({ type: 'DEAUTH', payload: { isLoading: true } })
             if (state.isLoading) return navigate('/login')
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
