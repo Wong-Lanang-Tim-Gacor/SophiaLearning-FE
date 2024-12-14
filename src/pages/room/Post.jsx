@@ -7,21 +7,22 @@ import {showClassroom} from "@/services/ClassroomService.jsx";
 import ListPostSkeleton from "@/components/skeleton/room/ListPostSkeleton.jsx";
 import BannerSkeleton from "@/components/skeleton/room/BannerSkeleton.jsx";
 import CodeRoom from '@/components/room/CodeRoom';
+import {getResource} from "@/services/ResourceService.jsx";
 
 const Post = () => {
     const navigate = useNavigate()
-    const [classroom, setClassroom] = useState()
+    const [resource, setResource] = useState()
     const {id} = useParams()
 
     useEffect(() => {
-        const getClassroom = async () => {
-            await showClassroom(id)
+        const getDataResource = async () => {
+            await getResource(id)
                 .then((response) => {
-                    setClassroom(response.data)
+                    setResource(response.data)
                 })
         }
 
-        getClassroom().catch(error => {
+        getDataResource().catch(error => {
             console.log(error)
         })
     }, [id])
@@ -29,26 +30,28 @@ const Post = () => {
     return (
         <>
             {
-                classroom ? (
-                    <Banner data={classroom}/>
+                resource ? (
+                    <Banner data={resource}/>
                 ) : <BannerSkeleton/>
             }
             <div className='mt-8 flex gap-4'>
                 <div className='hidden sm:block w-[40%]'>
-                    <CodeRoom 
-                        code={classroom?.identifier_code}
-                        color={classroom?.bg_tw_class}
-                        />
+                    <CodeRoom
+                        code={resource?.identifier_code}
+                        color={resource?.bg_tw_class}
+                    />
                 </div>
                 <div className='w-full space-y-4'>
-                <CreateAnnouncement/>
+                    <CreateAnnouncement/>
                     {
-                        classroom?.assignments ?
-                            classroom?.assignments.map((assignment, index) => (
+                        resource?.resources ?
+                            resource?.resources.map((r, index) => (
                                 <ListPost key={index}
-                                    onClick={() => navigate('detail')}
-                                    post={assignment} 
-                                    colorBg={classroom.bg_tw_class}/>
+                                          onClick={() => navigate('detail')}
+                                          post={r}
+                                          colorBg={resource.bg_tw_class}
+                                          typePost={r.type}
+                                />
                             ))
                             : (
                                 <ListPostSkeleton/>

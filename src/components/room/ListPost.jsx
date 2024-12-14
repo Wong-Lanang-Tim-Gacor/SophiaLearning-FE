@@ -15,6 +15,8 @@ const ListPost = (props) => {
                                 <i className={'fas fa-tasks text-white'}></i>
                             ) : typePost === 'material' ? (
                                 <i className={'fa fa-book text-white'}></i>
+                            ) : typePost === 'announcement' ? (
+                                <i className={'fas fa-bell text-white'}></i>
                             ) : ''
                         }
                     </div>
