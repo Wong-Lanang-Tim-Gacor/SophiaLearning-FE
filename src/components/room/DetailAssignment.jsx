@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import DetailResourceSkeleton from "@/components/skeleton/room/DetailResourceSkeleton.jsx";
+import {DateFormat} from "@/utils/FormattingString.jsx";
 
 const formatFileSize = (sizeInBytes) => {
     if (sizeInBytes < 1024) {
@@ -81,7 +82,7 @@ const DetailAssignment = (props) => {
                                 </div>
                                 <div>
                                     <h1 className='text-xl font-semibold'>{resource.title}</h1>
-                                    <p className='text-sm text-gray-500'>Teacher • {resource.created_at}</p>
+                                    <p className='text-sm text-gray-500'>{resource?.classroom?.teacher?.name} • {DateFormat(resource.created_at)}</p>
                                 </div>
                             </div>
                             <div className='text-right'>
@@ -110,7 +111,7 @@ const DetailAssignment = (props) => {
                                 </div>
                                 {
                                     resource.due_date ? (
-                                        <p className='text-sm font-medium'>Tenggat: {resource.due_date}</p>
+                                        <p className='text-sm font-medium'>Tenggat: {DateFormat(resource.due_date)}</p>
                                     ) : ''
                                 }
                             </div>
