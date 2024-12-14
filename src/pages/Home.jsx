@@ -6,7 +6,7 @@ import CardSkeleton from '@/components/skeleton/home/CardSkeleton.jsx'
 import JoinModal from '@/components/ui/modal/JoinModal'
 import CreateModal from '@/components/ui/modal/CreateModal'
 import ClassroomContext from '@/contexts/ClassroomContext'
-import classroomsReducer, { initialState } from '@/reducers/classroomReducer'
+import classroomsReducer, { initialState } from '@/reducers/ClassroomReducer'
 
 const Home = () => {
     const [state, dispatch] = useReducer(classroomsReducer, initialState)
