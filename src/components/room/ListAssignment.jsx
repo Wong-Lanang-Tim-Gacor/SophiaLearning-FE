@@ -2,7 +2,7 @@ import { DateFormat } from '@/utils/FormattingString';
 import React, {useEffect, useState} from 'react';
 
 function ListAssignment(props) {
-    const {data,key} = props
+    const {data,key,bgColor} = props
     const [menuVisible, setMenuVisible] = useState(false);
 
     // Fungsi untuk toggle menu
@@ -42,7 +42,7 @@ function ListAssignment(props) {
             <div className="flex items-center justify-between gap-x-4">
                 <div className="flex items-center gap-3">
                     <div>
-                        <div className={`bg-rose-500 w-[50px] h-[50px] rounded-full grid place-content-center`}>
+                        <div className={`${bgColor} w-[50px] h-[50px] rounded-full grid place-content-center`}>
                             <i className={'fas fa-tasks text-white'}></i>
                         </div>
                     </div>

@@ -13,7 +13,9 @@ function Assignment(props) {
     useEffect(() => {
         const getAssignment = async () => {
             return await getAssignmentByClass(id)
-                .then(data => setAssignments(data.data))
+                .then(data => {
+                    setAssignments(data.data)
+                })
                 .catch(err => console.log(err));
         }
 
@@ -24,8 +26,8 @@ function Assignment(props) {
             <Button onClick={() => navigate(`/room/${id}/assignment/create`)} type='primary' text='Tambah Tugas'/>
             {
                 assignments ?
-                    assignments?.map((assignment, index) => (
-                        <ListAssignment data={assignment} key={index}/>
+                    assignments?.resources?.filter(d => d.type === 'assignment')?.map((assignment, index) => (
+                        <ListAssignment data={assignment} key={index} bgColor={assignments.bg_tw_class}/>
                     )) : (
                         [1,2,3,4,5].map(() => (
                             <ListPostSkeleton/>
