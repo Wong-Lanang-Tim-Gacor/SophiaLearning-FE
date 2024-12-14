@@ -4,6 +4,10 @@ const getResource = async (id) => {
     return await api.get(`resources/class/${id}`)
         .then(res => res.data)
 }
+const showResource = async (id) => {
+    return await api.get(`resources/data/${id}`)
+        .then(res => res.data)
+}
 const getAnnouncement = async () => {
     return await api.get('resources/announcements')
         .then(res => res.data)
@@ -31,8 +35,9 @@ const storeResource = async (data) => {
 
 export {
     getResource,
+    showResource,
     getAnnouncement,
     getMaterial,
     storeAnnouncement,
-    storeResource
+    storeResource,
 }
