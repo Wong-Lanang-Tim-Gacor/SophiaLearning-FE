@@ -58,7 +58,7 @@ const Post = () => {
                         resource?.resources ?
                             resource?.resources.map((r, index) => (
                                 <ListPost key={index}
-                                          onClick={() => navigate('detail')}
+                                          onClick={() => navigate(`/room/${id}/resource/${r.id}`)}
                                           post={r}
                                           colorBg={resource.bg_tw_class}
                                           typePost={r.type}
