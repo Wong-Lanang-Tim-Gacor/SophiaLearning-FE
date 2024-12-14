@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {
     BtnRedo, BtnUndo, Editor, EditorProvider, Toolbar, BtnBold,
     BtnBulletList,
@@ -15,18 +15,42 @@ import {
 } from "react-simple-wysiwyg";
 import UploadDropzone from "@/components/ui/UploadDropzone.jsx";
 import Button from '@/components/ui/Button';
+import {storeClassroom} from "@/services/ClassroomService.jsx";
+import {storeAssignment} from "@/services/AssignmentService.jsx";
 
 function CreateAssignment(props) {
     const {id} = useParams();
     const [description, setDescription] = useState();
+    const [title, setTitle] = useState();
+    const [attachment, setAttachment] = useState([]);
+    const [dueDate, setDueDate] = useState();
+    const navigate = useNavigate()
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        return await storeAssignment({
+            classroom_id: id,
+            title: title,
+            content: description,
+            due_date: dueDate,
+            attachments: attachment,
+            type: 'assignment'
+        })
+            .then((response) => {
+                alert('success')
+                navigate(`/room/${id}/assignment`)
+            }).catch(err => {
+                alert('error')
+                console.log(err)
+            })
+    }
     return (
         <>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="my-2">
                     <label htmlFor="" className={'block'}>Judul</label>
                     <input type="text" className={'bg-gray-50 p-2 py-3 border outline-gray-400 w-full mt-2 rounded-md'}
-                           placeholder={'Masukan judul'}/>
+                           placeholder={'Masukan judul'} onChange={e => setTitle(e.target.value)}/>
                 </div>
                 <div className="my-2">
                     <label htmlFor="" className={'block'}>Petunjuk</label>
@@ -57,8 +81,14 @@ function CreateAssignment(props) {
                 </div>
 
                 <div className="my-2">
+                    <label htmlFor="" className={'block'}>Tenggat Waktu</label>
+                    <input type="date" className={'bg-gray-50 p-2 py-3 border outline-gray-400 w-full mt-2 rounded-md'}
+                           placeholder={'Masukan judul'} onChange={e => setDueDate(e.target.value)}/>
+                </div>
+
+                <div className="my-2">
                     <label htmlFor="" className={'block mb-2'}>Upload Lampiran</label>
-                    <UploadDropzone onChangeFile={(val) => console.log(val)}/>
+                    <UploadDropzone onChangeFile={(val) => setAttachment(val)}/>
                 </div>
 
                 <Button type='primary' text='Simpan'/>
