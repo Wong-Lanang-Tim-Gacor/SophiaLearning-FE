@@ -13,7 +13,10 @@ const HeroSection = () => {
       </div>
       <div className='container mx-auto max-w-[1200px] px-4 py-6'>
         <p className='text-md sm:text-lg w-3/4 text-gray-500 font-normal'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quis expedita vitae saepe sapiente. Assumenda suscipit reprehenderit ratione sunt perspiciatis?</p>
-        <button className='mt-4 bg-black text-white px-8 py-2 text-lg font-semibold rounded-md'>Start</button>
+        <div className='flex items-center gap-x-2'>
+          <button className='mt-4 bg-black text-white px-8 py-2 text-lg font-semibold rounded-md'>Masuk</button>
+          <button className='mt-4 bg-white border border-gray-300 px-8 py-2 text-lg font-semibold rounded-md'>Daftar</button>
+        </div>
       </div>
     </>
   )
