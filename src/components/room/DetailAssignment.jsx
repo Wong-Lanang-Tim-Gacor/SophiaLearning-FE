@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import DetailResourceSkeleton from "@/components/skeleton/room/DetailResourceSkeleton.jsx";
 import {DateFormat} from "@/utils/FormattingString.jsx";
+import { useContext } from 'react';
+import TeacherContext from '@/contexts/TeacherContext';
+import { Link } from 'react-router-dom';
 
 const formatFileSize = (sizeInBytes) => {
     if (sizeInBytes < 1024) {
@@ -23,7 +26,7 @@ const shortenFileName = (fileName, maxLength = 20) => {
 
 const DetailAssignment = (props) => {
     const { resource } = props
-
+    const { isTeacher } = useContext(TeacherContext)
     const [menuVisible, setMenuVisible] = useState(false)
 
     const toggleMenu = () => {
@@ -82,7 +85,9 @@ const DetailAssignment = (props) => {
                                 </div>
                                 <div>
                                     <h1 className='text-xl font-semibold'>{resource.title}</h1>
-                                    <p className='text-sm text-gray-500'>{resource?.classroom?.teacher?.name} • {DateFormat(resource.created_at)}</p>
+                                    <p className='text-sm text-gray-500'>
+                                        {isTeacher ? <Link to='attachment' className='text-blue-500 text-sm underline font-medium'>Lihat Pengumpulan</Link> : resource?.classroom?.teacher?.name } •  
+                                        {DateFormat(resource.created_at)}</p>
                                 </div>
                             </div>
                             <div className='text-right'>
@@ -120,7 +125,7 @@ const DetailAssignment = (props) => {
                             <div className="w-full">
                                 <div dangerouslySetInnerHTML={{ __html: resource.content }} />
                             </div>
-                            <div className="lg:w-1/3 w-full border rounded-md ">
+                            <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md ">
                                 <div className="space-y-4">
                                     {
                                         resource?.attachment?.map((attachment, index) => {

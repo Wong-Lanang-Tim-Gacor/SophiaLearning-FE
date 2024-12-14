@@ -19,6 +19,7 @@ import Calendar from '@/pages/Calendar'
 import Materials from "@/pages/room/Materials.jsx";
 import CreateMaterials from "@/pages/room/materials/CreateMaterials.jsx";
 import ScrollToTop from '@/utils/ScrollToTop'
+import Attachment from '@/pages/room/assignment/Attachment'
 
 const Routers = () => {
     return (
@@ -38,6 +39,7 @@ const Routers = () => {
                         <Route path='/room' element={<RoomLayout/>}>
                             <Route path=':id' element={<Post/>}/>
                             <Route path=':id/resource/:resourceId' element={<DetailResource/>}/>
+                            <Route path=':id/resource/:resourceId/attachment' element={<Attachment/>}/>
                             <Route path=':id/member' element={<Member/>}/>
                             <Route path=':id/assignment' element={<Assignment/>}/>
                             <Route path=':id/assignment/create' element={<CreateAssignment/>}/>
