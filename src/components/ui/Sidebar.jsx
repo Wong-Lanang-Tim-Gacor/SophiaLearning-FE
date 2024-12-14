@@ -17,7 +17,7 @@ const Sidebar = () => {
         },
         {
             name: 'Kalender',
-            path: '/calender',
+            path: '/calendar',
             icon: 'far fa-calendar'
         },
         {
