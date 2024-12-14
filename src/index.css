@@ -16,14 +16,14 @@
 }
 
 .grid-motif {
-    background:
-        linear-gradient(to right, #cfcfcf 1px, transparent 1px),
-        linear-gradient(to top, #cfcfcf 1px, transparent 1px);
-    background-size: 10% 30%;
+  background:
+    linear-gradient(to right, #cfcfcf 1px, transparent 1px),
+    linear-gradient(to top, #cfcfcf 1px, transparent 1px);
+  background-size: 10% 30%;
 }
 
 @media (max-width: 768px) {
-    .grid-motif {
-        background-size: 20% 30%;
-    }
+  .grid-motif {
+    background-size: 20% 30%;
+  }
 }
