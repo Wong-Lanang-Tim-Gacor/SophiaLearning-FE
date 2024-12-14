@@ -1,4 +1,4 @@
-import CreatePost from '@/components/room/CreatePost'
+import CreateAnnouncement from '@/components/room/CreateAnnouncement.jsx'
 import Banner from '@/components/ui/Banner'
 import ListPost from '@/components/room/ListPost'
 import React, {useEffect, useState} from 'react'
@@ -41,7 +41,7 @@ const Post = () => {
                         />
                 </div>
                 <div className='w-full space-y-4'>
-                <CreatePost/>
+                <CreateAnnouncement/>
                     {
                         classroom?.assignments ?
                             classroom?.assignments.map((assignment, index) => (
