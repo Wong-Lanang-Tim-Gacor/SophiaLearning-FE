@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {archiveClassroom} from "@/services/ClassroomService.jsx";
+import TeacherContext from "@/contexts/TeacherContext.jsx";
 
 const Card = (props) => {
-    const { data } = props;
+    const {data} = props;
     const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const [linkCopied, setLinkCopied] = useState(false);
 
     const handleCopyLink = () => {
-        const link = `${window.location.origin}/room/${data.id}`; // Mengambil link halaman detail berdasarkan ID
-        navigator.clipboard.writeText(link)  // Menyalin link ke clipboard
+        const link = `${window.location.origin}/room/${data.id}`;
+        navigator.clipboard.writeText(link)
             .then(() => {
                 toast.success('Sukses menyalin link!')
-                setLinkCopied(true);  // Menandakan bahwa link berhasil disalin
-                setTimeout(() => setLinkCopied(false), 2000);  // Reset status setelah 2 detik
+                setLinkCopied(true);
+                setTimeout(() => setLinkCopied(false), 2000);
             })
             .catch(err => {
                 toast.error('Gagal menyalin link!');
@@ -46,8 +47,14 @@ const Card = (props) => {
                         <button className="block w-full text-left" onClick={handleCopyLink}>
                             {linkCopied ? 'Link Disalin!' : 'Salin Link'}
                         </button>
-                        <button className="block w-full text-left">Edit</button>
-                        <button className="block w-full text-left" onClick={handleArchive}>Arsip</button>
+                        {
+                            data.is_teacher ? (
+                                <>
+                                    <button className="block w-full text-left">Edit</button>
+                                    <button className="block w-full text-left" onClick={handleArchive}>Arsip</button>
+                                </>
+                            ) : ''
+                        }
                     </div>
 
                     <div className={`${String(data.bg_tw_class)} px-4 pe-7 py-8 rounded-t-lg`}
