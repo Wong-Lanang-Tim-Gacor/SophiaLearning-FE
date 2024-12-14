@@ -6,7 +6,7 @@ export const MenuProvider = ({children}) => {
     const [active, setActive] = useState(false)
 
     return (
-        <MenuContext.Provider value={{active, setActive, classrooms}}>
+        <MenuContext.Provider value={{active, setActive}}>
             {children}
         </MenuContext.Provider>
     )
