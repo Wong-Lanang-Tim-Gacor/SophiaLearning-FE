@@ -1,13 +1,14 @@
 import CreateAnnouncement from '@/components/room/CreateAnnouncement.jsx'
 import Banner from '@/components/ui/Banner'
 import ListPost from '@/components/room/ListPost'
-import React, {createContext, useEffect, useState} from 'react'
+import React, {createContext, useContext, useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
 import {showClassroom} from "@/services/ClassroomService.jsx";
 import ListPostSkeleton from "@/components/skeleton/room/ListPostSkeleton.jsx";
 import BannerSkeleton from "@/components/skeleton/room/BannerSkeleton.jsx";
 import CodeRoom from '@/components/room/CodeRoom';
 import {getResource} from "@/services/ResourceService.jsx";
+import TeacherContext from "@/contexts/TeacherContext.jsx";
 
 const ResourceContext = createContext()
 
@@ -15,12 +16,17 @@ const Post = () => {
     const navigate = useNavigate()
     const [resource, setResource] = useState()
     const {id} = useParams()
-
+    const teacherContext = useContext(TeacherContext)
     useEffect(() => {
         const getDataResource = async () => {
             await getResource(id)
                 .then((response) => {
                     setResource(response.data)
+                    if (response.data.is_teacher){
+                        teacherContext.setIsTeacher({isTeacher: true})
+                    }else{
+                        teacherContext.setIsTeacher({isTeacher: false})
+                    }
                 })
         }
 
@@ -44,7 +50,10 @@ const Post = () => {
                     />
                 </div>
                 <div className='w-full space-y-4'>
-                    <CreateAnnouncement setData={d => setResource(d)} />
+                    {
+                        teacherContext.isTeacher.isTeacher ?
+                            <CreateAnnouncement setData={d => setResource(d)} /> : ''
+                    }
                     {
                         resource?.resources ?
                             resource?.resources.map((r, index) => (
