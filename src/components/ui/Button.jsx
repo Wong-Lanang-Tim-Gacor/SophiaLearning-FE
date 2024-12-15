@@ -8,7 +8,7 @@ const Button = (props) => {
     }
     return (
         <>
-            <button {...props} className={`${types[props.type]} py-2 px-4 rounded-md text-sm font-medium`}>{props.text}</button>
+            <button {...props} className={`${types[props.type]} py-2 px-4 rounded-md text-sm font-medium mt-2`}>{props.text}</button>
         </>
     )
 }
