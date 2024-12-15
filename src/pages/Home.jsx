@@ -90,7 +90,7 @@ const Home = () => {
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6'>
                     {
                         state.classrooms
-                            ? state.classrooms.map((room, index) => <Card key={index} data={room} />)
+                            ? state.classrooms.map((room, index) => <Card key={index} data={room} dispatch={dispatch}/>)
                             : (
                                 [1, 2, 3, 4].map((item) => <CardSkeleton key={item} />)
                             )

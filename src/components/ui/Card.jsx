@@ -1,14 +1,19 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
-import {archiveClassroom} from "@/services/ClassroomService.jsx";
+import {archiveClassroom, updateClassroom} from "@/services/ClassroomService.jsx";
 import TeacherContext from "@/contexts/TeacherContext.jsx";
+import CreateModal from "@/components/ui/modal/CreateModal.jsx";
+import api from "@/services/Api.jsx";
 
 const Card = (props) => {
-    const {data} = props;
+    const {data,dispatch} = props;
     const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const [linkCopied, setLinkCopied] = useState(false);
+    const [className, setClassName] = useState()
+    const [description, setDescription] = useState()
+    const [showModal, setShowModal] = useState(false)
 
     const handleCopyLink = () => {
         const link = `${window.location.origin}/room/${data.id}`;
@@ -23,6 +28,28 @@ const Card = (props) => {
             });
     };
 
+    // Di dalam handleUpdateClass di Card.jsx
+    const handleUpdateClass = async () => {
+        try {
+            const updatedClassroom = await updateClassroom(data.id, {
+                class_name: className,
+                description: description,
+            });
+
+            // Dispatch untuk memperbarui state global
+            dispatch({
+                type: 'EDIT_CLASSROOM',
+                payload: { id: data.id, class_name: className, description }
+            });
+
+            toast.success('Sukses edit data');
+            setShowModal(false);
+        } catch (err) {
+            toast.error('Gagal mengupdate data');
+        }
+    };
+
+
     const handleArchive = async () => {
         return await archiveClassroom(data?.id)
             .then(response => {
@@ -33,8 +60,26 @@ const Card = (props) => {
             })
     }
 
+    useEffect(() =>{
+        setClassName(data.class_name)
+        setDescription(data.description)
+    },[data])
+
     return (
         <>
+            {
+                showModal ? (
+                    <CreateModal
+                        onClose={() => setShowModal(!showModal)}
+                        class_name={className}
+                        description={description}
+                        onSubmit={handleUpdateClass}
+                        onChangeName={(name) => setClassName(name)}
+                        onChangeDescription={(desc) => setDescription(desc)}
+                        typeModal={'update'}
+                    />
+                ) : ''
+            }
             <div {...props} className='border border-gray-300 rounded-lg hover:shadow-md cursor-pointer'>
                 <div className="relative">
                     <button
@@ -50,7 +95,9 @@ const Card = (props) => {
                         {
                             data.is_teacher ? (
                                 <>
-                                    <button className="block w-full text-left">Edit</button>
+                                    <button className="block w-full text-left"
+                                            onClick={() => setShowModal(!showModal)}>Edit
+                                    </button>
                                     <button className="block w-full text-left" onClick={handleArchive}>Arsip</button>
                                 </>
                             ) : ''

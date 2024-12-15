@@ -6,11 +6,19 @@ export const initialState = {
     className: '',
     description: ''
 };
-
 const classroomsReducer = (state, action) => {
     switch (action.type) {
         case 'SET_CLASSROOMS':
             return { ...state, classrooms: action.payload };
+        case 'EDIT_CLASSROOM': // Aksi baru untuk mengedit kelas
+            return {
+                ...state,
+                classrooms: state.classrooms.map((classroom) =>
+                    classroom.id === action.payload.id
+                        ? { ...classroom, ...action.payload } // Update classroom yang sesuai
+                        : classroom
+                )
+            };
         case 'TOGGLE_ACTIVE':
             return { ...state, active: !state.active };
         case 'SET_MODAL':
@@ -26,6 +34,7 @@ const classroomsReducer = (state, action) => {
         default:
             return state;
     }
-}
+};
+
 
 export default classroomsReducer
