@@ -11,19 +11,57 @@ import classroomsReducer, { initialState } from '@/reducers/ClassroomReducer'
 const Home = () => {
     const [state, dispatch] = useReducer(classroomsReducer, initialState)
 
+    // const handleCreateClassroom = async () => {
+    //     try {
+    //         const response = await storeClassroom({
+    //             class_name: state.className,
+    //             description: state.description
+    //         })
+    //         dispatch({ type: 'ADD_CLASSROOM', payload: response.data })
+    //         dispatch({ type: 'SET_MODAL', payload: null })
+    //         toast.success('Sukses menambahkan kelas!')
+    //     } catch (error) {
+    //         toast.error('Gagal menambahkan kelas!')
+    //     }
+    // }
+
     const handleCreateClassroom = async () => {
         try {
             const response = await storeClassroom({
                 class_name: state.className,
-                description: state.description
-            })
-            dispatch({ type: 'ADD_CLASSROOM', payload: response.data })
-            dispatch({ type: 'SET_MODAL', payload: null })
-            toast.success('Sukses menambahkan kelas!')
+                description: state.description,
+            });
+
+            if (response.meta.status === 'success') {
+                dispatch({ type: 'ADD_CLASSROOM', payload: response.data });
+                dispatch({ type: 'SET_MODAL', payload: null });
+                toast.success('Sukses menambahkan kelas!');
+            } else {
+                // Tangani pesan validasi dari data error
+                if (response.data && response.meta.code === 422) {
+                    // Tampilkan pesan error validasi menggunakan `toast`
+                    Object.values(response.data).forEach((errors) => {
+                        errors.forEach((errorMessage) => {
+                            toast.error(errorMessage); // Tampilkan setiap pesan error
+                        });
+                    });
+                } else {
+                    // Tampilkan pesan error umum
+                    toast.error(response.meta.message || 'Gagal menambahkan kelas!');
+                }
+            }
         } catch (error) {
-            toast.error('Gagal menambahkan kelas!')
+            if (error.response) {
+                // Tampilkan error API jika ada
+                toast.error(
+                    error.response.data.meta.message || 'Terjadi kesalahan pada permintaan.'
+                );
+            } else {
+                toast.error('Tidak dapat terhubung ke server. Periksa koneksi internet Anda.');
+            }
         }
-    }
+    };
+
 
     // const handleJoin = async () => {
     //     try {

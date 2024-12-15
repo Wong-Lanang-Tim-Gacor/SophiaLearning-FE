@@ -22,25 +22,24 @@ const storeClassroom = async (data) => {
     try {
         const response = await api.post('/classrooms', data);
 
-        // Jika status code adalah 201, kembalikan respons data
+        // Jika berhasil dan statusnya sesuai, kembalikan respons data
         if (response.data.meta.code === 201) {
             return response.data;
         } else {
-            // Jika status code bukan 201, kembalikan error message dari API
+            // Jika ada masalah dengan status, kembalikan error dari API
             return {
                 meta: {
                     status: 'error',
-                    message: 'Gagal menyimpan classroom.',
+                    message: 'Gagal menambahkan classroom.',
                 },
                 data: null,
             };
         }
     } catch (error) {
-        // Menangani error API dan mengembalikan error dari API
+        // Menangani error dari server atau jaringan
         if (error.response) {
-            return error.response.data;
+            return error.response.data; // Kembalikan respons error dari API
         } else {
-            // Jika terjadi masalah jaringan, beri pesan error default
             return {
                 meta: {
                     status: 'error',
@@ -51,6 +50,7 @@ const storeClassroom = async (data) => {
         }
     }
 };
+
 
 
 const joinClassroom = async (classroomCode) => {
