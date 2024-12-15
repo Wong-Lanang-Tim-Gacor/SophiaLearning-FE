@@ -25,7 +25,7 @@ const Sidebar = () => {
         },
         {
             name: 'Daftar Tugas',
-            path: '/',
+            path: '/assignments',
             icon: 'fas fa-clipboard-list'
         }
     ]
