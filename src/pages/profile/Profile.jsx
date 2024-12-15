@@ -3,7 +3,8 @@ import Button from '@/components/ui/Button';
 import InputLabel from '@/components/ui/InputLabel';
 import { Link, useNavigate } from 'react-router-dom';
 import { UpdateProfile, GetProfile } from "@/services/AuthService.jsx";
-import {toast} from "react-hot-toast"; // Pastikan sudah ada fungsi GetProfile
+import {toast} from "react-hot-toast";
+import {ASSETS_URL} from "@/utils/Constant.jsx"; // Pastikan sudah ada fungsi GetProfile
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Profile = () => {
                     email: profile.email,
                     phone: profile.phone,
                 });
-                setImage(profile.photo_profile || null); // Set image URL if available
+                setImage(ASSETS_URL + profile.photo_profile || null); // Set image URL if available
             } catch (error) {
                 console.error('Error fetching profile data:', error);
             }
@@ -79,7 +80,7 @@ const Profile = () => {
                 <div className="py-6">
                     <img
                         className="w-[100px] sm:w-[150px] aspect-square rounded-full object-cover"
-                        src={image || 'default-profile-image.jpg'} // Use default if no image set
+                        src={image || ASSETS_URL+'default-profile-image.jpg'} // Use default if no image set
                         alt="profile"
                     />
                 </div>
