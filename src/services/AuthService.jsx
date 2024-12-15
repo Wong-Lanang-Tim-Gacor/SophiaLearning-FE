@@ -4,16 +4,31 @@ import { BASE_API } from '@/utils/Constant'
 
 // Service POST Method
 export const PostAuthenticate = async (data) => {
-    return await axios.post(BASE_API+'/auth/login', data)
-        .then(response => {
-            if (response.status === 200) {
-                sessionStorage.setItem('token', response.data.data.token)
-            }
-            return response.data
-        }).catch(error => {
-            console.error(error)
-        })
-}
+    try {
+        // Mengirimkan request POST ke API
+        const response = await axios.post(BASE_API + '/auth/login', data);
+
+        // Jika berhasil dan statusnya 200, simpan token di sessionStorage
+        if (response.status === 200) {
+            sessionStorage.setItem('token', response.data.data.token);
+        }
+
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            return error.response.data;
+        } else {
+            return {
+                meta: {
+                    status: 'error',
+                    message: 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.',
+                },
+                data: null,
+            };
+        }
+    }
+};
+
 
 // Service GET Method
 
