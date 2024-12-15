@@ -11,30 +11,90 @@ import classroomsReducer, { initialState } from '@/reducers/ClassroomReducer'
 const Home = () => {
     const [state, dispatch] = useReducer(classroomsReducer, initialState)
 
+    // const handleCreateClassroom = async () => {
+    //     try {
+    //         const response = await storeClassroom({
+    //             class_name: state.className,
+    //             description: state.description
+    //         })
+    //         dispatch({ type: 'ADD_CLASSROOM', payload: response.data })
+    //         dispatch({ type: 'SET_MODAL', payload: null })
+    //         toast.success('Sukses menambahkan kelas!')
+    //     } catch (error) {
+    //         toast.error('Gagal menambahkan kelas!')
+    //     }
+    // }
+
     const handleCreateClassroom = async () => {
         try {
             const response = await storeClassroom({
                 class_name: state.className,
-                description: state.description
-            })
-            dispatch({ type: 'ADD_CLASSROOM', payload: response.data })
-            dispatch({ type: 'SET_MODAL', payload: null })
-            toast.success('Sukses menambahkan kelas!')
+                description: state.description,
+            });
+
+            if (response.meta.status === 'success') {
+                dispatch({ type: 'ADD_CLASSROOM', payload: response.data });
+                dispatch({ type: 'SET_MODAL', payload: null });
+                toast.success('Sukses menambahkan kelas!');
+            } else {
+                // Tangani pesan validasi dari data error
+                if (response.data && response.meta.code === 422) {
+                    // Tampilkan pesan error validasi menggunakan `toast`
+                    Object.values(response.data).forEach((errors) => {
+                        errors.forEach((errorMessage) => {
+                            toast.error(errorMessage); // Tampilkan setiap pesan error
+                        });
+                    });
+                } else {
+                    // Tampilkan pesan error umum
+                    toast.error(response.meta.message || 'Gagal menambahkan kelas!');
+                }
+            }
         } catch (error) {
-            toast.error('Gagal menambahkan kelas!')
+            if (error.response) {
+                // Tampilkan error API jika ada
+                toast.error(
+                    error.response.data.meta.message || 'Terjadi kesalahan pada permintaan.'
+                );
+            } else {
+                toast.error('Tidak dapat terhubung ke server. Periksa koneksi internet Anda.');
+            }
         }
-    }
+    };
+
+
+    // const handleJoin = async () => {
+    //     try {
+    //         const response = await joinClassroom(state.classroomCode)
+    //         dispatch({ type: 'ADD_CLASSROOM', payload: response.data })
+    //         dispatch({ type: 'SET_MODAL', payload: null })
+    //         toast.success('Sukses gabung kelas')
+    //     } catch (error) {
+    //         toast.error('Gagal gabung kelas')
+    //     }
+    // }
 
     const handleJoin = async () => {
         try {
-            const response = await joinClassroom(state.classroomCode)
-            dispatch({ type: 'ADD_CLASSROOM', payload: response.data })
-            dispatch({ type: 'SET_MODAL', payload: null })
-            toast.success('Sukses gabung kelas')
+            const response = await joinClassroom(state.classroomCode);
+
+            if (response.meta.status === 'success') {
+                dispatch({ type: 'ADD_CLASSROOM', payload: response.data });
+                dispatch({ type: 'SET_MODAL', payload: null });
+                toast.success('Sukses gabung kelas');
+            } else {
+                toast.error(response.meta.message || 'Gagal gabung kelas');
+            }
         } catch (error) {
-            toast.error('Gagal gabung kelas')
+
+            if (error.response) {
+                toast.error(error.response.data.meta.message || 'Terjadi kesalahan saat memproses permintaan.');
+            } else {
+
+                toast.error('Tidak dapat terhubung ke server. Periksa koneksi internet Anda.');
+            }
         }
-    }
+    };
 
     useEffect(() => {
         const fetchClassrooms = async () => {
@@ -55,45 +115,45 @@ const Home = () => {
                     <h1 className='text-xl font-semibold'>Daftar Kelas</h1>
                     <div className='relative'>
                         <button
-                            onClick={() => dispatch({type: 'TOGGLE_ACTIVE'})}
+                            onClick={() => dispatch({ type: 'TOGGLE_ACTIVE' })}
                             className='w-[40px] h-[40px] cursor-pointer hover:bg-gray-100 rounded-full flex items-center justify-center'>
                             <i className='fas fa-plus text-lg'></i>
                         </button>
                         <div
                             className={`${state.active ? 'scale-1' : 'scale-0'} rounded-md transition-all border border-gray-300 shadow-md absolute p-4 w-[150px] right-0 space-y-4 bg-white text-sm z-10`}>
-                            <button onClick={() => dispatch({type: 'SET_MODAL', payload: 'join'})}>Gabung Kelas</button>
-                            <button onClick={() => dispatch({type: 'SET_MODAL', payload: 'create'})}>Buat Kelas</button>
+                            <button onClick={() => dispatch({ type: 'SET_MODAL', payload: 'join' })}>Gabung Kelas</button>
+                            <button onClick={() => dispatch({ type: 'SET_MODAL', payload: 'create' })}>Buat Kelas</button>
                         </div>
                     </div>
                 </div>
 
                 {state.modal === 'join' && (
                     <JoinModal
-                        onClose={() => dispatch({type: 'SET_MODAL', payload: null})}
+                        onClose={() => dispatch({ type: 'SET_MODAL', payload: null })}
                         code={state.classroomCode}
                         onSubmit={handleJoin}
-                        onChangeCode={(code) => dispatch({type: 'SET_CLASSROOM_CODE', payload: code})}
+                        onChangeCode={(code) => dispatch({ type: 'SET_CLASSROOM_CODE', payload: code })}
                     />
                 )}
 
                 {state.modal === 'create' && (
                     <CreateModal
-                        onClose={() => dispatch({type: 'SET_MODAL', payload: null})}
+                        onClose={() => dispatch({ type: 'SET_MODAL', payload: null })}
                         name={state.className}
                         description={state.description}
                         onSubmit={handleCreateClassroom}
-                        onChangeName={(name) => dispatch({type: 'SET_CLASS_NAME', payload: name})}
-                        onChangeDescription={(desc) => dispatch({type: 'SET_DESCRIPTION', payload: desc})}
+                        onChangeName={(name) => dispatch({ type: 'SET_CLASS_NAME', payload: name })}
+                        onChangeDescription={(desc) => dispatch({ type: 'SET_DESCRIPTION', payload: desc })}
                     />
                 )}
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6'>
                     {
                         state.classrooms
                             ? state.classrooms.filter(room => !room.archived).map((room, index) => (
-                                <Card key={index} data={room} dispatch={dispatch}/>
+                                <Card key={index} data={room} dispatch={dispatch} />
                             ))
                             : (
-                                [1, 2, 3, 4].map((item) => <CardSkeleton key={item}/>)
+                                [1, 2, 3, 4].map((item) => <CardSkeleton key={item} />)
                             )
                     }
                 </div>
