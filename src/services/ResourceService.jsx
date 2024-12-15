@@ -17,7 +17,6 @@ const storeResource = async (data) => {
         return response.data
     })
 }
-
 const updateResource = async (id,data) => {
     return await api.post(`/resources/data/${id}?_method=PUT`, data, {
         headers:{
@@ -35,10 +34,23 @@ const storeChat = async (data) => {
         })
 }
 
+const getAnswerByResource = async (id) => {
+    return await api.get(`/resources/assignments/answers/by-resource/${id}`)
+        .then(res => res.data)
+}
+
+const updateAnswer = async (id,data) => {
+    return await api.put(`/resources/answer/${id}`, data).then(response => {
+        return response.data
+    })
+}
+
 export {
     getResource,
     showResource,
     storeChat,
     storeResource,
-    updateResource
+    updateResource,
+    updateAnswer,
+    getAnswerByResource
 }
