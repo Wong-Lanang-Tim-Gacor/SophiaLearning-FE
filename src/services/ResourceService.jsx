@@ -18,6 +18,16 @@ const storeResource = async (data) => {
     })
 }
 
+const updateResource = async (id,data) => {
+    return await api.post(`/resources/data/${id}?_method=PUT`, data, {
+        headers:{
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then(response => {
+        return response.data
+    })
+}
+
 const storeChat = async (data) => {
     return await api.post(`resources/chat`, data)
         .then(res => {
@@ -30,4 +40,5 @@ export {
     showResource,
     storeChat,
     storeResource,
+    updateResource
 }

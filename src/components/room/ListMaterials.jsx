@@ -64,7 +64,7 @@ function ListMaterials(props) {
                         <div
                             className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg">
                             <ul className="text-sm text-gray-700">
-                                <li className="px-4 py-2 cursor-pointer hover:bg-gray-200" onClick={handleEdit}>
+                                <li className="px-4 py-2 cursor-pointer hover:bg-gray-200" onClick={() => navigate(`/room/${id}/materials/${data.id}/edit`)}>
                                     Edit
                                 </li>
                                 <li className="px-4 py-2 cursor-pointer hover:bg-gray-200" onClick={handleDelete}>

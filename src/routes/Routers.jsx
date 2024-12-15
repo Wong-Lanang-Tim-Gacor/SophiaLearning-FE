@@ -20,6 +20,8 @@ import Materials from "@/pages/room/Materials.jsx";
 import CreateMaterials from "@/pages/room/materials/CreateMaterials.jsx";
 import ScrollToTop from '@/utils/ScrollToTop'
 import Attachment from '@/pages/room/assignment/Attachment'
+import EditAssignment from "@/pages/room/assignment/EditAssignment.jsx";
+import EditMaterials from "@/pages/room/materials/EditMaterials.jsx";
 
 const Routers = () => {
     return (
@@ -43,8 +45,10 @@ const Routers = () => {
                             <Route path=':id/member' element={<Member/>}/>
                             <Route path=':id/assignment' element={<Assignment/>}/>
                             <Route path=':id/assignment/create' element={<CreateAssignment/>}/>
+                            <Route path=':id/assignment/:resourceId/edit' element={<EditAssignment/>}/>
                             <Route path=':id/materials' element={<Materials/>}/>
                             <Route path=':id/materials/create' element={<CreateMaterials/>}/>
+                            <Route path=':id/materials/:resourceId/edit' element={<EditMaterials/>}/>
                         </Route>
                         <Route path='/profile' element={<ProfileLayout/>}>
                             <Route path='/profile' element={<Profile/>}/>
