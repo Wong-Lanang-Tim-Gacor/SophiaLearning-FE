@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import DetailResourceSkeleton from "@/components/skeleton/room/DetailResourceSkeleton.jsx";
-import { DateFormat } from "@/utils/FormattingString.jsx";
+import {DateFormat} from "@/utils/FormattingString.jsx";
 import TeacherContext from '@/contexts/TeacherContext';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import UploadDropzone from "@/components/ui/UploadDropzone.jsx";
 import Button from "@/components/ui/Button.jsx";
-import { storeAnswer } from "@/services/AssignmentService.jsx";
-import { toast } from "react-hot-toast";
+import {deleteAssignment, storeAnswer} from "@/services/AssignmentService.jsx";
+import {toast} from "react-hot-toast";
 
 const formatFileSize = (sizeInBytes) => {
     if (sizeInBytes < 1024) {
@@ -33,11 +33,13 @@ const shortenFileName = (fileName, maxLength = 10) => {
 };
 
 const DetailAssignment = (props) => {
-    const { resource } = props;
-    const { isTeacher } = useContext(TeacherContext);
+    const {id} = useParams()
+    const {resource} = props;
+    const {isTeacher} = useContext(TeacherContext);
     const [menuVisible, setMenuVisible] = useState(false);
     const [answerAttachment, setAnswerAttachment] = useState([]);
-    const [submitedAnswer,setSubmitedAnswer] = useState()
+    const [submitedAnswer, setSubmitedAnswer] = useState()
+    const navigate = useNavigate()
 
     const handleSubmitAnswer = async () => {
         let confirmSubmit = confirm('Apakah yakin untuk mengirimkan jawaban ini?')
@@ -59,19 +61,17 @@ const DetailAssignment = (props) => {
     const toggleMenu = () => {
         setMenuVisible(!menuVisible);
     };
-
-    const handleEdit = () => {
-        alert('Edit Item');
+    const handleDelete = async () => {
+        return await deleteAssignment(resource.id)
+            .then(res => {
+                toast.success('Hapus tugas Berhasil')
+                navigate(`/room/${id}/assignment`)
+                console.log(res)
+            }).catch(err => {
+                toast.error('Hapus tugas gagal')
+                console.log(err)
+            })
     };
-
-    const handleCopyLink = () => {
-        alert('Salin Link');
-    };
-
-    const handleDelete = () => {
-        alert('Hapus Item');
-    };
-
     const handleClickOutside = (e) => {
         if (!e.target.closest('.menu-container')) {
             setMenuVisible(false);
@@ -98,7 +98,8 @@ const DetailAssignment = (props) => {
                 <>
                     <div className="flex justify-between items-center">
                         <div className="flex items-center gap-x-6">
-                            <div className={`${resource?.classroom?.bg_tw_class} w-[50px] h-[50px] rounded-full grid place-content-center`}>
+                            <div
+                                className={`${resource?.classroom?.bg_tw_class} w-[50px] h-[50px] rounded-full grid place-content-center`}>
                                 {
                                     resource.type === 'assignment' ? (
                                         <i className={'fas fa-tasks text-white'}></i>
@@ -113,7 +114,8 @@ const DetailAssignment = (props) => {
                                 <h1 className="text-xl font-semibold">{resource.title}</h1>
                                 <p className="text-sm text-gray-500">
                                     {isTeacher.isTeacher ? (
-                                        <Link to="attachment" className="text-blue-500 text-sm underline font-medium">Lihat Pengumpulan</Link>
+                                        <Link to="answer" className="text-blue-500 text-sm underline font-medium">Lihat
+                                            Pengumpulan</Link>
                                     ) : (
                                         resource?.classroom?.teacher?.name
                                     )}
@@ -127,15 +129,15 @@ const DetailAssignment = (props) => {
                                     <i className="fas fa-ellipsis-v"></i>
                                 </button>
                                 {menuVisible && (
-                                    <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg">
+                                    <div
+                                        className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg">
                                         <ul className="text-sm text-gray-700">
-                                            <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 text-start" onClick={handleEdit}>
+                                            <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 text-start"
+                                                onClick={() => navigate(`/room/${id}/assignment/${resource.id}/edit`)}>
                                                 Edit
                                             </li>
-                                            <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 text-start" onClick={handleCopyLink}>
-                                                Salin Link
-                                            </li>
-                                            <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 text-start" onClick={handleDelete}>
+                                            <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 text-start"
+                                                onClick={handleDelete}>
                                                 Hapus
                                             </li>
                                         </ul>
@@ -150,7 +152,7 @@ const DetailAssignment = (props) => {
 
                     <div className="flex flex-col lg:flex-row mt-5 gap-5">
                         <div className={`w-full ${isTeacher.isTeacher ? 'lg:w-2/3' : 'lg:w-2/3'}`}>
-                            <div dangerouslySetInnerHTML={{ __html: resource.content }} />
+                            <div dangerouslySetInnerHTML={{__html: resource.content}}/>
 
                             {!isTeacher.isTeacher ? (
                                 <div className="w-full border border-gray-300 p-4 rounded-md mt-5">
@@ -187,44 +189,44 @@ const DetailAssignment = (props) => {
 
                         {!isTeacher.isTeacher ? (
                             submitedAnswer ? (
-                                    <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md">
-                                        <div className="flex justify-between items-center mb-3">
-                                            <div className="text-sm text-gray-600 font-bold">Jawaban Anda</div>
-                                            <b className={'text-xl'}>{submitedAnswer.point}/100</b>
-                                        </div>
-                                        <div className="space-y-4">
-                                            {submitedAnswer.attachments?.map((attachment, index) => {
-                                                const shortenedFileName = shortenFileName(attachment.file_name, 14);
-                                                const formattedFileSize = formatFileSize(attachment.file_size);
-                                                return (
+                                <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <div className="text-sm text-gray-600 font-bold">Jawaban Anda</div>
+                                        <b className={'text-xl'}>{submitedAnswer.point}/100</b>
+                                    </div>
+                                    <div className="space-y-4">
+                                        {submitedAnswer.attachments?.map((attachment, index) => {
+                                            const shortenedFileName = shortenFileName(attachment.file_name, 14);
+                                            const formattedFileSize = formatFileSize(attachment.file_size);
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="w-full border bg-gray-100 rounded-md p-4 flex items-center cursor-pointer"
+                                                    onClick={() => handleDownload(attachment.file_url)}
+                                                >
                                                     <div
-                                                        key={index}
-                                                        className="w-full border bg-gray-100 rounded-md p-4 flex items-center cursor-pointer"
-                                                        onClick={() => handleDownload(attachment.file_url)}
-                                                    >
-                                                        <div
-                                                            className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-4">
-                                                            <i className="fas fa-file text-gray-600 text-lg"></i>
-                                                        </div>
-                                                        <div className="flex flex-col justify-center">
+                                                        className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                                        <i className="fas fa-file text-gray-600 text-lg"></i>
+                                                    </div>
+                                                    <div className="flex flex-col justify-center">
                                                         <span
                                                             className="font-medium text-sm text-gray-800">{shortenedFileName}</span>
-                                                            <span
-                                                                className="text-xs text-gray-500">{formattedFileSize}</span>
-                                                        </div>
+                                                        <span
+                                                            className="text-xs text-gray-500">{formattedFileSize}</span>
                                                     </div>
-                                                );
-                                            })}
-                                        </div>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
-                                ) : resource?.answer ? (
+                                </div>
+                            ) : resource?.answer ? (
                                 <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md">
                                     <div className="flex justify-between items-center mb-3">
                                         <div className="text-sm text-gray-600 font-bold">Jawaban Anda</div>
                                         <b className={'text-xl'}>{resource.answer.point}/100</b>
                                     </div>
                                     <div className="space-y-4">
-                                    {resource?.answer.attachments?.map((attachment, index) => {
+                                        {resource?.answer.attachments?.map((attachment, index) => {
                                             const shortenedFileName = shortenFileName(attachment.file_name, 14);
                                             const formattedFileSize = formatFileSize(attachment.file_size);
                                             return (
@@ -251,8 +253,8 @@ const DetailAssignment = (props) => {
                             ) : (
                                 <div className="w-full lg:w-1/3 border border-gray-300 p-4 rounded-md">
                                     <div className="text-sm text-gray-600 mb-3 font-bold">Upload Jawaban</div>
-                                    <UploadDropzone onChangeFile={(val) => setAnswerAttachment(val)} />
-                                    <Button text={'Kirim Jawaban'} type={'primary'} onClick={handleSubmitAnswer} />
+                                    <UploadDropzone onChangeFile={(val) => setAnswerAttachment(val)}/>
+                                    <Button text={'Kirim Jawaban'} type={'primary'} onClick={handleSubmitAnswer}/>
                                 </div>
                             )
                         ) : (
@@ -285,7 +287,7 @@ const DetailAssignment = (props) => {
                         )}
                     </div>
                 </>
-            ) : <DetailResourceSkeleton />}
+            ) : <DetailResourceSkeleton/>}
         </>
     );
 };
