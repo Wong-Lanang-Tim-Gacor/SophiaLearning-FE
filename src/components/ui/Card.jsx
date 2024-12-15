@@ -51,14 +51,22 @@ const Card = (props) => {
 
 
     const handleArchive = async () => {
-        return await archiveClassroom(data?.id)
-            .then(response => {
-                toast.success('Kelas berhasil di arsipkan')
-            })
-            .catch(e => {
-                toast.error('Kelas gagal di arsipkan')
-            })
+        try {
+            // Panggil API untuk mengarsipkan kelas
+            await archiveClassroom(data.id);
+
+            // Update state dengan dispatch ke reducer untuk arsipkan kelas
+            dispatch({
+                type: 'ARCHIVE_CLASSROOM',
+                payload: { id: data.id }
+            });
+
+            toast.success('Kelas berhasil diarsipkan');
+        } catch (error) {
+            toast.error('Kelas gagal diarsipkan');
+        }
     }
+
 
     useEffect(() =>{
         setClassName(data.class_name)

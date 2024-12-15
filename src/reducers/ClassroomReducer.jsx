@@ -31,6 +31,16 @@ const classroomsReducer = (state, action) => {
             return { ...state, description: action.payload };
         case 'ADD_CLASSROOM':
             return { ...state, classrooms: [...state.classrooms, action.payload] };
+        case 'ARCHIVE_CLASSROOM':
+            return {
+                ...state,
+                classrooms: state.classrooms.map((classroom) =>
+                    classroom.id === action.payload.id
+                        ? { ...classroom, archived: true }
+                        : classroom
+                )
+            };
+
         default:
             return state;
     }
