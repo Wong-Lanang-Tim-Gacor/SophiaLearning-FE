@@ -8,8 +8,50 @@ const showResource = async (id) => {
     return await api.get(`resources/data/${id}`)
         .then(res => res.data)
 }
+// const storeResource = async (data) => {
+//     return await api.post(`/resources/data`, data, {
+//         headers: {
+//             'Content-Type': 'multipart/form-data'
+//         }
+//     }).then(response => {
+//         return response.data
+//     })
+// }
+
 const storeResource = async (data) => {
-    return await api.post(`/resources/data`, data, {
+    try {
+        const response = await api.post('/resources/data', data);
+
+        if (response.status === 201) {
+            return response.data;
+        } else {
+            return {
+                meta: {
+                    status: 'error',
+                    message: 'Gagal menambahkan resource.',
+                },
+                data: null,
+            };
+        }
+    } catch (error) {
+        if (error.response) {
+            return error.response.data; // Kembalikan respons error dari API
+        } else {
+            return {
+                meta: {
+                    status: 'error',
+                    message: 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.',
+                },
+                data: null,
+            };
+        }
+    }
+};
+
+
+
+const updateResource = async (id, data) => {
+    return await api.post(`/resources/data/${id}?_method=PUT`, data, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
@@ -17,15 +59,7 @@ const storeResource = async (data) => {
         return response.data
     })
 }
-const updateResource = async (id,data) => {
-    return await api.post(`/resources/data/${id}?_method=PUT`, data, {
-        headers:{
-            'Content-Type': 'multipart/form-data'
-        }
-    }).then(response => {
-        return response.data
-    })
-}
+
 
 const storeChat = async (data) => {
     return await api.post(`resources/chat`, data)
@@ -39,7 +73,7 @@ const getAnswerByResource = async (id) => {
         .then(res => res.data)
 }
 
-const updateAnswer = async (id,data) => {
+const updateAnswer = async (id, data) => {
     return await api.put(`/resources/answer/${id}`, data).then(response => {
         return response.data
     })
