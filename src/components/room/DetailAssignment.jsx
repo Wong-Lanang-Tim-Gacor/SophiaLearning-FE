@@ -223,7 +223,7 @@ const DetailAssignment = (props) => {
                                         })}
                                     </div>
                                 </div>
-                            ) : resource?.answer ? (
+                            ) : Object.keys(resource?.answer).length > 0 ? (
                                 <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md">
                                     <div className="flex justify-between items-center mb-3">
                                         <div className="text-sm text-gray-600 font-bold">Jawaban Anda</div>
