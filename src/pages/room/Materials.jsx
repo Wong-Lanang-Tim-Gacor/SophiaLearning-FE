@@ -12,6 +12,8 @@ function Materials(props) {
     const navigate = useNavigate()
     const [materials, setMaterials] = useState()
     const teacherContext = useContext(TeacherContext);
+    const [deleted, setDeleted] = useState(false);
+
 
     useEffect(() => {
         const getMaterials = async () => {
@@ -28,18 +30,20 @@ function Materials(props) {
         }
 
         getMaterials().catch(err => console.log(err));
-    }, [id]);
+    }, [id, deleted, teacherContext]);
     return (
         <>
             {
                 teacherContext.isTeacher.isTeacher ? (
-                    <Button onClick={() => navigate(`/room/${id}/materials/create`)} type='primary' text='Tambah Materi'/>
+                    <Button onClick={() => navigate(`/room/${id}/materials/create`)} type='primary'
+                            text='Tambah Materi'/>
                 ) : ''
             }
             {
                 materials ?
                     materials?.resources?.filter(d => d.type === 'material')?.map((assignment, index) => (
-                        <ListMaterials data={assignment} key={index} bgColor={materials.bg_tw_class}/>
+                        <ListMaterials data={assignment} key={index} bgColor={materials.bg_tw_class}
+                                       setDeleted={setDeleted}/>
                     )) : (
                         [1, 2, 3, 4, 5].map(() => (
                             <ListPostSkeleton/>
