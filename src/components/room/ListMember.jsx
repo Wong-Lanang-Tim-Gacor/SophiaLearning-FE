@@ -1,15 +1,15 @@
 import React from 'react'
 
 const ListMember = (props) => {
-  const {member,key} = props
-  const image = 'https://avatarfiles.alphacoders.com/374/thumb-1920-374880.png'
-  
+  const { member, key } = props
+  const image = 'http://127.0.0.1:8000/storage/' + member.photo_profile
+
   return (
     <>
-        <div className='flex items-center gap-x-2 py-2 px-4' key={key}>
-            <img className='w-[50px] h-[50px] rounded-full' src={image} alt='profile'/>
-            <p className='text-sm font-normal'>{member.name}</p>
-        </div>
+      <div className='flex items-center gap-x-2 py-2 px-4' key={key}>
+        <img className='w-[50px] h-[50px] rounded-full' src={image} alt='profile' />
+        <p className='text-sm font-normal'>{member.name}</p>
+      </div>
     </>
   )
 }
