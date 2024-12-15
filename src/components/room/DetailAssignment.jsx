@@ -188,7 +188,10 @@ const DetailAssignment = (props) => {
                         {!isTeacher.isTeacher ? (
                             submitedAnswer ? (
                                     <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md">
-                                        <div className="text-sm text-gray-600 mb-3 font-bold">Jawaban Anda</div>
+                                        <div className="flex justify-between items-center mb-3">
+                                            <div className="text-sm text-gray-600 font-bold">Jawaban Anda</div>
+                                            <b className={'text-xl'}>{submitedAnswer.point}/100</b>
+                                        </div>
                                         <div className="space-y-4">
                                             {submitedAnswer.attachments?.map((attachment, index) => {
                                                 const shortenedFileName = shortenFileName(attachment.file_name, 14);
@@ -214,32 +217,35 @@ const DetailAssignment = (props) => {
                                             })}
                                         </div>
                                     </div>
-                                ) : resource?.answer[0] ? (
-                                    <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md">
-                                        <div className="text-sm text-gray-600 mb-3 font-bold">Jawaban Anda</div>
-                                        <div className="space-y-4">
-                                            {resource?.answer[0].attachments?.map((attachment, index) => {
-                                                const shortenedFileName = shortenFileName(attachment.file_name, 14);
-                                                const formattedFileSize = formatFileSize(attachment.file_size);
-                                                return (
+                                ) : resource?.answer ? (
+                                <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <div className="text-sm text-gray-600 font-bold">Jawaban Anda</div>
+                                        <b className={'text-xl'}>{resource.answer.point}/100</b>
+                                    </div>
+                                    <div className="space-y-4">
+                                    {resource?.answer.attachments?.map((attachment, index) => {
+                                            const shortenedFileName = shortenFileName(attachment.file_name, 14);
+                                            const formattedFileSize = formatFileSize(attachment.file_size);
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="w-full border bg-gray-100 rounded-md p-4 flex items-center cursor-pointer"
+                                                    onClick={() => handleDownload(attachment.file_url)}
+                                                >
                                                     <div
-                                                        key={index}
-                                                        className="w-full border bg-gray-100 rounded-md p-4 flex items-center cursor-pointer"
-                                                        onClick={() => handleDownload(attachment.file_url)}
-                                                    >
-                                                        <div
-                                                            className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-4">
-                                                            <i className="fas fa-file text-gray-600 text-lg"></i>
-                                                        </div>
-                                                        <div className="flex flex-col justify-center">
+                                                        className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                                        <i className="fas fa-file text-gray-600 text-lg"></i>
+                                                    </div>
+                                                    <div className="flex flex-col justify-center">
                                                         <span
                                                             className="font-medium text-sm text-gray-800">{shortenedFileName}</span>
-                                                            <span
-                                                                className="text-xs text-gray-500">{formattedFileSize}</span>
-                                                        </div>
+                                                        <span
+                                                            className="text-xs text-gray-500">{formattedFileSize}</span>
                                                     </div>
-                                                );
-                                            })}
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             ) : (
