@@ -1,8 +1,9 @@
+import { ASSETS_URL } from '@/utils/Constant'
 import React from 'react'
 
 const ListMember = (props) => {
   const { member, key } = props
-  const image = 'http://127.0.0.1:8000/storage/' + member.photo_profile
+  const image = ASSETS_URL + member.photo_profile
 
   return (
     <>

@@ -1,12 +1,13 @@
 import Button from '@/components/ui/Button'
 import InputLabel from '@/components/ui/InputLabel'
+import { ASSETS_URL } from '@/utils/Constant'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Profile = () => {
     const navigate = useNavigate()
     // const image = 'https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    const image = 'http://127.0.0.1:8000/storage/' + member.photo_profile
+    const image = ASSETS_URL + member.photo_profile
 
     return (
         <>

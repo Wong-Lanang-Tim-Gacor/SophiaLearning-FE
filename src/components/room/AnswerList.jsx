@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DateFormat } from "@/utils/FormattingString.jsx";
 import { formatFileSize, handleDownload, shortenFileName } from "@/utils/FileUtils.jsx";
+import { ASSETS_URL } from '@/utils/Constant';
 
 function AnswerList(props) {
     const { answer, onNilaiChange } = props;
@@ -18,7 +19,7 @@ function AnswerList(props) {
 
 
     // const image = 'https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-    const image = 'http://127.0.0.1:8000/storage/' + answer.student.photo_profile
+    const image = ASSETS_URL + answer.student.photo_profile
 
 
     return (
