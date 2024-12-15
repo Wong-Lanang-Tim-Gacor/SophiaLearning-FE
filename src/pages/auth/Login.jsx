@@ -19,6 +19,7 @@ function Login() {
         }).then((response) => {
             if (response.meta.status === 'success') {
                 sessionStorage.setItem('token', response.data.token)
+                sessionStorage.setItem('user', JSON.stringify(response.data))
                 dispatch({
                     type: 'AUTH',
                     payload: {
