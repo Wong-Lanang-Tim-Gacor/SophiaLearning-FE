@@ -19,11 +19,39 @@ const showClassroom = async (id) => {
 
 
 const storeClassroom = async (data) => {
-    return await api.post('/classrooms', data)
-        .then((response) => {
-            if (response.data.meta.code === 201) return response.data
-        })
-}
+    try {
+        const response = await api.post('/classrooms', data);
+
+        // Jika status code adalah 201, kembalikan respons data
+        if (response.data.meta.code === 201) {
+            return response.data;
+        } else {
+            // Jika status code bukan 201, kembalikan error message dari API
+            return {
+                meta: {
+                    status: 'error',
+                    message: 'Gagal menyimpan classroom.',
+                },
+                data: null,
+            };
+        }
+    } catch (error) {
+        // Menangani error API dan mengembalikan error dari API
+        if (error.response) {
+            return error.response.data;
+        } else {
+            // Jika terjadi masalah jaringan, beri pesan error default
+            return {
+                meta: {
+                    status: 'error',
+                    message: 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.',
+                },
+                data: null,
+            };
+        }
+    }
+};
+
 
 const joinClassroom = async (classroomCode) => {
     return await api.post(`/classrooms/${classroomCode}/join`)
