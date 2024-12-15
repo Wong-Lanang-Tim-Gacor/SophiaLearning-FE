@@ -18,6 +18,13 @@ const showClassroom = async (id) => {
 }
 
 
+// const storeClassroom = async (data) => {
+//     return await api.post('/classrooms', data)
+//         .then((response) => {
+//             if (response.data.meta.code === 201) return response.data
+//         })
+// }
+
 const storeClassroom = async (data) => {
     try {
         const response = await api.post('/classrooms', data);
@@ -51,8 +58,6 @@ const storeClassroom = async (data) => {
     }
 };
 
-
-
 const joinClassroom = async (classroomCode) => {
     return await api.post(`/classrooms/${classroomCode}/join`)
         .then((response) => {
@@ -68,7 +73,7 @@ const updateClassroom = async (id, data) => {
 }
 
 const archiveClassroom = async (id) => {
-    return await api.put(`/classrooms/${id}`,{
+    return await api.put(`/classrooms/${id}`, {
         is_archived: true,
     }).then(response => {
         return response.data

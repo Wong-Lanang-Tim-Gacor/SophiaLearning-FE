@@ -27,21 +27,32 @@ function CreateMaterials(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        return await storeResource({
+    
+        const response = await storeResource({
             classroom_id: id,
             title: title,
             content: description,
             attachments: attachment,
-            type: 'material'
-        })
-            .then((response) => {
-                navigate(`/room/${id}/materials`)
-                toast.success("Tambah materi berhasil!");
-            }).catch(err => {
-                toast.error("Tambah materi gagal!");
-                console.log(err)
-            })
-    }
+            type: 'material',
+        });
+    
+        if (response.meta.status === 'success') {
+            navigate(`/room/${id}/materials`);
+            toast.success('Tambah materi berhasil!');
+        } else {
+            // Tampilkan pesan error detail jika tersedia
+            if (response.data && response.meta.code === 422) {
+                Object.values(response.data).forEach((errors) => {
+                    errors.forEach((errorMessage) => {
+                        toast.error(errorMessage); // Tampilkan pesan error validasi
+                    });
+                });
+            } else {
+                toast.error(response.meta.message || 'Tambah materi gagal!');
+            }
+        }
+    };
+    
     return (
         <>
             <form onSubmit={handleSubmit}>
