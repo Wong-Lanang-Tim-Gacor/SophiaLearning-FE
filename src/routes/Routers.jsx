@@ -41,7 +41,7 @@ const Routers = () => {
                         <Route path='/room' element={<RoomLayout/>}>
                             <Route path=':id' element={<Post/>}/>
                             <Route path=':id/resource/:resourceId' element={<DetailResource/>}/>
-                            <Route path=':id/resource/:resourceId/attachment' element={<Attachment/>}/>
+                            <Route path=':id/resource/:resourceId/answer' element={<Attachment/>}/>
                             <Route path=':id/member' element={<Member/>}/>
                             <Route path=':id/assignment' element={<Assignment/>}/>
                             <Route path=':id/assignment/create' element={<CreateAssignment/>}/>
