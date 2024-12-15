@@ -60,7 +60,7 @@ function AnswerList(props) {
                             <input
                                 type="number"
                                 value={nilai}
-                                className="text-sm w-[30px] border-b border-gray-300 outline-none"
+                                className="text-sm w-[80px] border-b border-gray-300 outline-none"
                                 onBlur={handleBlur}
                                 onChange={(e) => setNilai(e.target.value)}  // Mengubah nilai input
                             />
