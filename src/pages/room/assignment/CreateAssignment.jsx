@@ -34,10 +34,10 @@ function CreateAssignment(props) {
             title: title,
             content: description,
             attachments: attachment,
-            type: 'material',
+            type: 'assignment',
         });
 
-        if (response.meta.status === 'success') {
+        if (response?.meta?.status === 'success') {
             navigate(`/room/${id}/materials`);
             toast.success('Tambah materi berhasil!');
         } else {
@@ -49,7 +49,7 @@ function CreateAssignment(props) {
                     });
                 });
             } else {
-                toast.error(response.meta.message || 'Tambah materi gagal!');
+                toast.error(response?.meta?.message || 'Tambah materi gagal!');
             }
         }
     };

@@ -8,45 +8,45 @@ const showResource = async (id) => {
     return await api.get(`resources/data/${id}`)
         .then(res => res.data)
 }
-// const storeResource = async (data) => {
-//     return await api.post(`/resources/data`, data, {
-//         headers: {
-//             'Content-Type': 'multipart/form-data'
-//         }
-//     }).then(response => {
-//         return response.data
-//     })
-// }
-
 const storeResource = async (data) => {
-    try {
-        const response = await api.post('/resources/data', data);
+    return await api.post(`/resources/data`, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then(response => {
+        return response.data
+    })
+}
 
-        if (response.status === 201) {
-            return response.data;
-        } else {
-            return {
-                meta: {
-                    status: 'error',
-                    message: 'Gagal menambahkan resource.',
-                },
-                data: null,
-            };
-        }
-    } catch (error) {
-        if (error.response) {
-            return error.response.data; // Kembalikan respons error dari API
-        } else {
-            return {
-                meta: {
-                    status: 'error',
-                    message: 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.',
-                },
-                data: null,
-            };
-        }
-    }
-};
+// const storeResource = async (data) => {
+//     try {
+//         const response = await api.post('/resources/data', data);
+//
+//         if (response.status === 201) {
+//             return response.data;
+//         } else {
+//             return {
+//                 meta: {
+//                     status: 'error',
+//                     message: 'Gagal menambahkan resource.',
+//                 },
+//                 data: null,
+//             };
+//         }
+//     } catch (error) {
+//         if (error.response) {
+//             return error.response.data; // Kembalikan respons error dari API
+//         } else {
+//             return {
+//                 meta: {
+//                     status: 'error',
+//                     message: 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.',
+//                 },
+//                 data: null,
+//             };
+//         }
+//     }
+// };
 
 
 
