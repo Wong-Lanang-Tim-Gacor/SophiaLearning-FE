@@ -64,11 +64,11 @@ const DetailAssignment = (props) => {
     const handleDelete = async () => {
         return await deleteAssignment(resource.id)
             .then(res => {
-                toast.success('Hapus tugas Berhasil')
-                navigate(`/room/${id}/${resource.type == 'material' ? 'materials' : resource.type}`)
+                toast.success('Hapus Berhasil')
+                navigate(`/room/${id}`)
                 console.log(res)
             }).catch(err => {
-                toast.error('Hapus tugas gagal')
+                toast.error('Hapus gagal')
                 console.log(err)
             })
     };
@@ -113,7 +113,7 @@ const DetailAssignment = (props) => {
                             <div>
                                 <h1 className="text-xl font-semibold">{resource.title}</h1>
                                 <p className="text-sm text-gray-500">
-                                    {isTeacher.isTeacher ? (
+                                    {isTeacher.isTeacher && resource.type === 'assignment' ? (
                                         <Link to="answer" className="text-blue-500 text-sm underline font-medium">Lihat
                                             Pengumpulan</Link>
                                     ) : (
@@ -132,10 +132,14 @@ const DetailAssignment = (props) => {
                                     <div
                                         className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg">
                                         <ul className="text-sm text-gray-700">
-                                            <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 text-start"
-                                                onClick={() => navigate(`/room/${id}/${resource.type == 'material' ? 'materials' : resource.type}/${resource.id}/edit`)}>
-                                                Edit
-                                            </li>
+                                            {
+                                                !resource.type === 'announcement' ? (
+                                                    <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 text-start"
+                                                        onClick={() => navigate(`/room/${id}/${resource.type == 'material' ? 'materials' : resource.type}/${resource.id}/edit`)}>
+                                                        Edit
+                                                    </li>
+                                                ) : ''
+                                            }
                                             <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 text-start"
                                                 onClick={handleDelete}>
                                                 Hapus
