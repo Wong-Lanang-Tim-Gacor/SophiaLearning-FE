@@ -23,6 +23,7 @@ import AssignmentAnswer from '@/pages/room/assignment/AssignmentAnswer.jsx'
 import EditAssignment from "@/pages/room/assignment/EditAssignment.jsx";
 import EditMaterials from "@/pages/room/materials/EditMaterials.jsx";
 import AllAssignmentList from "@/pages/AllAssignmentList.jsx";
+import Register from "@/pages/auth/Register.jsx";
 
 const Routers = () => {
     return (
@@ -33,6 +34,7 @@ const Routers = () => {
                     <Route element={<GuestRoute/>}>
                         <Route path='/landing' element={<Landing/>}/>
                         <Route path={'/login'} element={<Login/>}/>
+                        <Route path={'/register'} element={<Register/>}/>
                     </Route>
                     <Route element={<ProtectedRoute/>}>
                         <Route path='/' element={<AppLayout/>}>

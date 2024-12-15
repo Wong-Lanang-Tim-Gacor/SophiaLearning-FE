@@ -67,7 +67,7 @@ function Login() {
                             </div>
                             <Button type='primary' text='Masuk' />
                         </form>
-                        <p className='text-sm text-gray-500 font-normal mt-8'>Tidak memiliki Akun? <Link to='/' className='text-blue-600 font-semibold'>Daftar disini</Link></p>
+                        <p className='text-sm text-gray-500 font-normal mt-8'>Tidak memiliki Akun? <Link to='/register' className='text-blue-600 font-semibold'>Daftar disini</Link></p>
                     </div>
                 </div>
             </div>
