@@ -39,7 +39,6 @@ const DetailAssignment = (props) => {
     const [menuVisible, setMenuVisible] = useState(false);
     const [answerAttachment, setAnswerAttachment] = useState([]);
     const [submitedAnswer, setSubmitedAnswer] = useState()
-    const [myAnswer,setMyAnswer] = useState([])
     const navigate = useNavigate()
 
     const handleSubmitAnswer = async () => {
@@ -86,10 +85,6 @@ const DetailAssignment = (props) => {
         };
     }, []);
 
-    useEffect(() => {
-        setMyAnswer(resource?.answer?.filter(d => d.user_id == JSON.parse(sessionStorage.getItem('user'))['id']))
-    }, [resource]);
-
     const handleDownload = (url) => {
         const link = document.createElement('a');
         link.href = url;
@@ -122,7 +117,7 @@ const DetailAssignment = (props) => {
                                         <Link to="answer" className="text-blue-500 text-sm underline font-medium">Lihat
                                             Pengumpulan</Link>
                                     ) : (
-                                        resource?.classroom?.teacher?.name + ' '
+                                        resource?.classroom?.teacher?.name
                                     )}
                                     • {DateFormat(resource.created_at)}
                                 </p>
@@ -228,14 +223,14 @@ const DetailAssignment = (props) => {
                                         })}
                                     </div>
                                 </div>
-                            ) : myAnswer?.length > 0 ? (
+                            ) : Object.keys(resource?.answer).length > 0 ? (
                                 <div className="lg:w-1/3 w-full border border-gray-300 p-4 rounded-md">
                                     <div className="flex justify-between items-center mb-3">
                                         <div className="text-sm text-gray-600 font-bold">Jawaban Anda</div>
-                                        <b className={'text-xl'}>{myAnswer.point}/100</b>
+                                        <b className={'text-xl'}>{resource.answer.point}/100</b>
                                     </div>
                                     <div className="space-y-4">
-                                        {myAnswer?.[0].attachments?.map((attachment, index) => {
+                                        {resource?.answer.attachments?.map((attachment, index) => {
                                             const shortenedFileName = shortenFileName(attachment.file_name, 14);
                                             const formattedFileSize = formatFileSize(attachment.file_size);
                                             return (
