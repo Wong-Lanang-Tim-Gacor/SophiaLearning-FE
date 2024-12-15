@@ -45,6 +45,10 @@ const updateAnswer = async (id,data) => {
     })
 }
 
+const getCalendar = async () => {
+    return await api.get(`/resources/assignments/calendar/user`).then(res => res.data)
+}
+
 export {
     getResource,
     showResource,
@@ -52,5 +56,6 @@ export {
     storeResource,
     updateResource,
     updateAnswer,
-    getAnswerByResource
+    getAnswerByResource,
+    getCalendar,
 }
