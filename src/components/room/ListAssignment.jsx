@@ -1,28 +1,31 @@
 import {DateFormat} from '@/utils/FormattingString';
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
+import {deleteAssignment} from "@/services/AssignmentService.jsx";
+import {toast} from "react-hot-toast";
 
 function ListAssignment(props) {
     const {id} = useParams();
-    const {data, key, bgColor} = props
+    const {data, key, bgColor,setDeleted} = props
     const [menuVisible, setMenuVisible] = useState(false);
     const navigate = useNavigate();
-    // Fungsi untuk toggle menu
     const toggleMenu = () => {
         setMenuVisible(!menuVisible);
     };
 
-    // Fungsi untuk aksi menu
     const handleEdit = () => {
         alert('Edit Item');
     };
-
-    const handleCopyLink = () => {
-        alert('Salin Link');
-    };
-
-    const handleDelete = () => {
-        alert('Hapus Item');
+    const handleDelete =async () => {
+        return await deleteAssignment(data.id)
+            .then(res => {
+                setDeleted(true)
+                toast.success('Hapus tugas Berhasil')
+                console.log(res)
+            }).catch(err => {
+                toast.error('Hapus tugas gagal')
+                console.log(err)
+            })
     };
 
     // Fungsi untuk menutup menu saat klik di luar menu
@@ -40,10 +43,9 @@ function ListAssignment(props) {
         };
     }, []);
     return (
-        <div className="border border-gray-300 p-4 rounded-lg cursor-pointer hover:shadow-md mt-5" key={key}
-             onClick={() => navigate(`/room/${id}/resource/${data.id}`)}>
-            <div className="flex items-center justify-between gap-x-4">
-                <div className="flex items-center gap-3">
+        <div className="border border-gray-300 p-4 rounded-lg cursor-pointer hover:shadow-md mt-5" key={key}>
+            <div className="flex items-center justify-between gap-x-4" >
+                <div className="flex items-center gap-3"  onClick={() => navigate(`/room/${id}/resource/${data.id}`)}>
                     <div>
                         <div className={`${bgColor} w-[50px] h-[50px] rounded-full grid place-content-center`}>
                             <i className={'fas fa-book text-white'}></i>
@@ -64,9 +66,6 @@ function ListAssignment(props) {
                             <ul className="text-sm text-gray-700">
                                 <li className="px-4 py-2 cursor-pointer hover:bg-gray-200" onClick={handleEdit}>
                                     Edit
-                                </li>
-                                <li className="px-4 py-2 cursor-pointer hover:bg-gray-200" onClick={handleCopyLink}>
-                                    Salin Link
                                 </li>
                                 <li className="px-4 py-2 cursor-pointer hover:bg-gray-200" onClick={handleDelete}>
                                     Hapus

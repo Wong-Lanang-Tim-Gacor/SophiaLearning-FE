@@ -11,6 +11,7 @@ const Assignment = () => {
     const navigate = useNavigate()
     const [assignments, setAssignments] = useState()
     const teacherContext = useContext(TeacherContext);
+    const [deleted,setDeleted] = useState(false);
 
     useEffect(() => {
         const getAssignment = async () => {
@@ -27,7 +28,7 @@ const Assignment = () => {
         }
 
         getAssignment().catch(err => console.log(err));
-    }, [id]);
+    }, [id, deleted, teacherContext]);
     return (
         <>
             {
@@ -38,7 +39,7 @@ const Assignment = () => {
             {
                 assignments ?
                     assignments?.resources?.filter(d => d.type === 'assignment')?.map((assignment, index) => (
-                        <ListAssignment data={assignment} key={index} bgColor={assignments.bg_tw_class}/>
+                        <ListAssignment data={assignment} key={index} bgColor={assignments.bg_tw_class} setDeleted={setDeleted}/>
                     )) : (
                         [1,2,3,4,5].map(() => (
                             <ListPostSkeleton/>

@@ -19,8 +19,15 @@ const storeAnswer = async (data) => {
             return res.data
         })
 }
+const deleteAssignment = async (id) => {
+    return await api.delete(`/resources/data/${id}`)
+        .then(response => {
+            return response.data
+        })
+}
 
 export {
     getAssignmentByClass,
     storeAnswer,
+    deleteAssignment,
 }
