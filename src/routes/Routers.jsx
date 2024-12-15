@@ -22,6 +22,7 @@ import ScrollToTop from '@/utils/ScrollToTop'
 import AssignmentAnswer from '@/pages/room/assignment/AssignmentAnswer.jsx'
 import EditAssignment from "@/pages/room/assignment/EditAssignment.jsx";
 import EditMaterials from "@/pages/room/materials/EditMaterials.jsx";
+import AllAssignmentList from "@/pages/AllAssignmentList.jsx";
 
 const Routers = () => {
     return (
@@ -37,6 +38,7 @@ const Routers = () => {
                         <Route path='/' element={<AppLayout/>}>
                             <Route index path='/' element={<Home/>}/>
                             <Route path='/calendar' element={<Calendar/>}/>
+                            <Route path='/assignments' element={<AllAssignmentList/>}/>
                         </Route>
                         <Route path='/room' element={<RoomLayout/>}>
                             <Route path=':id' element={<Post/>}/>

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import api from './Api'
-import { BASE_API } from '@/utils/Constant'
+import {BASE_API} from '@/utils/Constant'
 
 // Service POST Method
 export const PostAuthenticate = async (data) => {
@@ -29,19 +29,6 @@ export const PostAuthenticate = async (data) => {
     }
 };
 
-
-// Service GET Method
-
-/** 
-
-api.get/post menandakan endpoint memerlukan token
-jadi endpoint apapun yang butuh token harus make api 
-kalo tidak butuh token baru make axios kayak diatas
-BASE_API digunakan jika tidak menggunakan module api
-karena base api-nya sudah ada di module api.
-
- **/
-
 export const GetProfile = async () => {
     const response = await api.get('/user')
     return response.data
@@ -49,9 +36,9 @@ export const GetProfile = async () => {
 
 export const Logout = async () => {
     return await api.post('/auth/logout')
-    .then(response => {
-        return response.data
-    })
+        .then(response => {
+            return response.data
+        })
 }
 
 export const CheckAuthUser = async () => {
@@ -62,4 +49,13 @@ export const CheckAuthUser = async () => {
             console.error(error)
             return false
         });
+}
+
+export const UpdateProfile = async (data) => {
+    return await api.post('/auth/profile?_method=PUT', data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+        .then(response => response.data)
 }
